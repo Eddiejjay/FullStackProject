@@ -2,7 +2,7 @@
 
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
-| 18.5.2021 |5h  |projektin suunnittelu  |
+| 18.5.2021 |7h  |projektin suunnittelu  |
 | |     |  |
 | |    |  |
 |       |     | |
