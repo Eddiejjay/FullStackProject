@@ -1,6 +1,8 @@
 import React from 'react'
 import YatzyTable from './components/YatzyTable'
 
+
+
 function App() {
   return (
     <div>
