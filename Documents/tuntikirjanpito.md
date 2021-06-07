@@ -6,11 +6,11 @@
 | 2.6.2021|7h   |UI:n suunnittelu paperille, vaatimusmäärittely, sovelluksen rakenteen suunnittelu  |
 | 6.6.2021|4h    |Scrum suunnittelu  |
 |  6.6.2021 |4h    |Yatzy UI |
-|       |   |  |
+|  7.6.2021  4,5h   |UI   |  |
 |  |     |  |
 |       |    |  |
 |   |     |  |
 |   |     |  |
 |       |    |  |
 |  |     |  |
-| yht   | 22 h   | | 
+| yht   | 26.5 h   | | 
