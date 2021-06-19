@@ -1,5 +1,6 @@
-import React, { useState }from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
 
 const StyledTable = styled.table `
     border-style: solid;
@@ -19,7 +20,7 @@ const StyledCell = styled.td `
 
 const StyledInput = styled.input`
         width:50px;
-        
+
         `
 const ReadyButton = styled.button`
       border-radius: 50%;
@@ -37,7 +38,7 @@ const YatzyTable = () => {
   //MITEN OIKEA KOHTA LÖYDETÄÄN?
   //SE INPUT JOKA SUBMITOIDAAN SISÄLTÄÄ TIEDOISSAAN COMBINATIONIN JA PLAYERIN? NÄIN PÄÄSEME KÄSISKI TIETOON MIHIN PISTEET TALLENNETAAN
 
-  const [pointsToRegister, setPointsToRegister] = useState([])
+  // const [pointsToRegister, setPointsToRegister] = useState([])
 
   // Tarvitaan Reduxiin pisteStore, jossa jokaisella pelaajalla on oma pisteenlasku.
 
@@ -66,37 +67,73 @@ const YatzyTable = () => {
 
   // ]
 
-
   const properties =
     ['Ykköset', 'Kakkoset', 'Kolmoset', 'Neloset', 'Vitoet',
       'Kutoset', 'Välisumma', 'Pari', 'Kaksi paria', 'Kolme samaa', 'Neljä samaa', 'Pikku suora',
       'Iso suora', 'Täyskäsi', 'Sattuma', 'Yatzy', 'Pisteet']
 
-  const players = ['Jorma', 'Kalle', 'Kyösti']
+  const players = ['Keijo', 'Kalevi', 'Jorma']
 
-  const inputChange = (event) => {
-    event.preventDefault()
-    const arr = event.target.name.split(',')
-    setPointsToRegister(arr)
-    console.log('statesta',pointsToRegister, typeof pointsToRegister)
-    return (
-      console.log(pointsToRegister)
-    )
+  // const playersFromStore = useSelector(state => state)
 
-  }
+
+
+
+  // const inputChange = (event) => {
+  //   event.preventDefault()
+  //   const arr = event.target.name.split(',')
+  //   setPointsToRegister(arr)
+  //   console.log('statesta',pointsToRegister, typeof pointsToRegister)
+  //   return (
+  //     console.log(pointsToRegister)
+  //   )
+
+  // }
+
+  const allPoints = useSelector(state => state)
+  console.log('allpoints in', allPoints)
 
   return (
     <div>
       <StyledTable>
         <tbody><tr><td></td>{players.map(player => <td key={player}>{player}</td>)}</tr></tbody>
-        {properties.map(property =>
+
+        <StyledRow>
+          <Combination>{properties[0]}</Combination>
+          {allPoints.map(points => points.points.ykkoset === 0 ?<StyledInput/> :<StyledCell name = {points.player} key = {points.player}> {points.points.ykkoset} </StyledCell>)}
+        </StyledRow>
+        <StyledRow>
+          <Combination>{properties[1]}</Combination>
+          {allPoints.map(points => points.points.kakkoset === 0 ?<StyledInput/> :<StyledCell name = {points.player} key = {points.player}> {points.points.kakkoset} </StyledCell>)}
+        </StyledRow>
+        <StyledRow>
+          <Combination>{properties[2]}</Combination>
+          {allPoints.map(points => points.points.kolmoset === 0 ?<StyledInput/> :<StyledCell name = {points.player} key = {points.player}> {points.points.kolmoset} </StyledCell>)}
+        </StyledRow>
+        <StyledRow>
+          <Combination>{properties[16]}</Combination>
+          {allPoints.map(points => <StyledCell name = {points.player} key = {points.player}> {points.points.pisteet} </StyledCell>)}
+        </StyledRow>
+
+        {/*PISTEIDEN YHTEEN LASKUSSA VOIT HYÖDYNTÄÄ METODIA JOKA MUUTTAA OBJECTIN ARVOT LISAKSI
+       Object.values() näin saat laskettua pisteet esiumn reducella ja siutten dispatchaat pisteisiin*/}
+
+
+        {/* {properties.map(property =>
           <tbody key={property}>
             <StyledRow key={property}>
-              <Combination>{property}</Combination>
+              <Combination>{property}</Combinatdion>
               {players.map(player =>
-                <StyledCell key ={player}><StyledInput name={[property, player]}onChange={inputChange}/></StyledCell>)}
+                allPoints.map(points =>
+                  points.player === player && points.points.ykkoset === 0 ?
+                    <StyledCell key ={player}><StyledInput name={[property, player]}onChange={inputChange}/></StyledCell> : <StyledCell/>
+                )
+              )}
+
             </StyledRow>
-          </tbody>)}
+          </tbody>)} */}
+
+
 
       </StyledTable>
 

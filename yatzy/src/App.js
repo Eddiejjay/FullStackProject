@@ -17,9 +17,6 @@ const App = () => {
 
 
 
-
-
-
   return (
     <div>
       <h1>Yatzy</h1>
