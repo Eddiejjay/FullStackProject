@@ -3,11 +3,11 @@
 [
   {
    "points" :  {
-            "ykkoset": 1,
+            "ykkoset": 0,
             "kakkoset": 0,
             "kolmoset": 3,
             "neloset": 0,
-            "vitoset": 0,
+            "vitoset": 3,
             "kutoset": 0,
             "valisumma": 0,
             "pari": 0,
@@ -28,7 +28,7 @@
       {    
       "points" : {
               "ykkoset": 2,
-              "kakkoset": 4,
+              "kakkoset": 0,
               "kolmoset": 6,
               "neloset": 0,
               "vitoset": 0,
