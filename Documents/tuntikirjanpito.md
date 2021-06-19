@@ -9,8 +9,8 @@
 |  7.6.2021  | 4,5h    |UI  |
 |8.6.2021  |3,5 h     |Redux lisätty sovellukseen |
 |17.6      |5h    | Yatzy taulukon yksityiskohtaisempi suunnittelu, pisteidenlaskulogiikka |
-|   |     |  |
+|17.6  | 4,5h    | Taulukon kirjoitus uudestaan, psiteiden lisäys toimii, reduceria päivitetty |
 |   |     |  |
 |       |    |  |
 |  |     |  |
-| yht   | 35 h   | | 
+| yht   | 39,5 h   | | 
