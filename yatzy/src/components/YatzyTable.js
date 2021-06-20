@@ -44,7 +44,7 @@ const YatzyTable = () => {
   const [combinationPlayer, setCombinationPlayer] = useState([])
 
   const properties =
-    [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','pari','kaksiparia',
+    [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
       'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
   const players = ['Keijo', 'Kalevi', 'Jorma']
@@ -69,8 +69,40 @@ const YatzyTable = () => {
     const combinationToAddPoints = combinationPlayer[0]
     const pointsToAdd = combinationPlayer[2]
     console.log('omista konstatnteista ', 'playertoaddpoints ', playerToAddPoints, 'combination', combinationToAddPoints, 'pionts tpo add ', pointsToAdd)
-    dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, pointsToAdd))
+    dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, Number(pointsToAdd)))
 
+  }
+
+  const valisummaOnClick = () => {
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+  }
+
+  const allPointsOnClick = () => {
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
+  }
+
+  const calculateAllpoints = (points) => {
+    const pointsArray = Object.values(points)
+    console.log('pointsArray', pointsArray)
+    const slicedArray = pointsArray.slice(6,15)
+    console.log('slicedArray', slicedArray)
+    let sum = slicedArray.reduce((a,c) => a + c, 0)
+    console.log('pisteet', sum)
+    return sum
+  }
+
+  const calculateValisumma = (points) => {
+    // tämän funktion tarkoitus on ottaa parametriksi yhden pelaajan serverobjektista points objekti
+    //1. muuttaa objekti taulukoksi jossa ovat objecktin valuet.
+    //2. laskea taulukosta 6 ensimmäistä arvoa ja niiden lopputulos on valisumma
+    const pointsArray = Object.values(points)
+    console.log('pointsArray', pointsArray)
+    const slicedArray = pointsArray.slice(0,6)
+    console.log('slicedArray', slicedArray)
+    let sum = slicedArray.reduce((a,c) => a + c, 0)
+    console.log('valisumma', sum)
+    return sum
   }
 
   return (
@@ -107,50 +139,60 @@ const YatzyTable = () => {
           </StyledRow>
           <StyledRow>
             <Combination>{properties[6]}</Combination>
-            {allPoints.map(points => points.points.valisumma === 0 ?<td><StyledInput name={[properties[6], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.valisumma} </StyledCell>)}
+            {allPoints.map(points =>  <StyledCell name = {points.player} key = {points.player}> {points.points.valisumma} </StyledCell>)}
+            <button onClick = {valisummaOnClick}>laske</button>
           </StyledRow>
+
           <StyledRow>
             <Combination>{properties[7]}</Combination>
-            {allPoints.map(points => points.points.pari === 0 ?<td><StyledInput name={[properties[7], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.pari} </StyledCell>)}
+            {allPoints.map(points => <StyledCell name = {points.player} key = {points.player}> {points.points.bonus} </StyledCell>)}
           </StyledRow>
+          {//mietin miten saat dipatchattyä bonus pisteet serverille, siin' vaiheessa kun välisymma lasketaan Olisiko valisummaonclick() =?
+          }
+
           <StyledRow>
             <Combination>{properties[8]}</Combination>
-            {allPoints.map(points => points.points.kaksiparia === 0 ?<td><StyledInput name={[properties[8], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.kaksiparia} </StyledCell>)}
+            {allPoints.map(points => points.points.pari === 0 ?<td><StyledInput name={[properties[8], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.pari} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[9]}</Combination>
-            {allPoints.map(points => points.points.kolmesamaa === 0 ?<td><StyledInput name={[properties[9], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.kolmesamaa} </StyledCell>)}
+            {allPoints.map(points => points.points.kaksiparia === 0 ?<td><StyledInput name={[properties[9], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.kaksiparia} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[10]}</Combination>
-            {allPoints.map(points => points.points.neljasamaa === 0 ?<td><StyledInput name={[properties[10], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.neljasamaa} </StyledCell>)}
+            {allPoints.map(points => points.points.kolmesamaa === 0 ?<td><StyledInput name={[properties[10], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.kolmesamaa} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[11]}</Combination>
-            {allPoints.map(points => points.points.pikkusuora === 0 ?<td><StyledInput name={[properties[11], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.pikkusuora} </StyledCell>)}
+            {allPoints.map(points => points.points.neljasamaa === 0 ?<td><StyledInput name={[properties[11], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.neljasamaa} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[12]}</Combination>
-            {allPoints.map(points => points.points.isosuora === 0 ?<td><StyledInput name={[properties[12], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.isosuora} </StyledCell>)}
+            {allPoints.map(points => points.points.pikkusuora === 0 ?<td><StyledInput name={[properties[12], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.pikkusuora} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[13]}</Combination>
-            {allPoints.map(points => points.points.tayskasi === 0 ?<td><StyledInput name={[properties[13], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.tayskasi} </StyledCell>)}
+            {allPoints.map(points => points.points.isosuora === 0 ?<td><StyledInput name={[properties[13], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.isosuora} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[14]}</Combination>
-            {allPoints.map(points => points.points.sattuma === 0 ?<td><StyledInput name={[properties[14], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.sattuma} </StyledCell>)}
+            {allPoints.map(points => points.points.tayskasi === 0 ?<td><StyledInput name={[properties[14], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.tayskasi} </StyledCell>)}
           </StyledRow>
           <StyledRow>
             <Combination>{properties[15]}</Combination>
-            {allPoints.map(points => points.points.yatzy === 0 ?<td><StyledInput name={[properties[15], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.yatzy} </StyledCell>)}
+            {allPoints.map(points => points.points.sattuma === 0 ?<td><StyledInput name={[properties[15], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.sattuma} </StyledCell>)}
+          </StyledRow>
+          <StyledRow>
+            <Combination>{properties[16]}</Combination>
+            {allPoints.map(points => points.points.yatzy === 0 ?<td><StyledInput name={[properties[16], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {points.player}> {points.points.yatzy} </StyledCell>)}
           </StyledRow>
 
 
 
           <StyledRow>
-            <Combination>{properties[16]}</Combination>
+            <Combination>{properties[17]}</Combination>
             {allPoints.map(points => <StyledCell name = {points.player} key = {points.player}> {points.points.pisteet} </StyledCell>)}
+            <button onClick = {allPointsOnClick}>laske</button>
           </StyledRow>
 
         </tbody>
