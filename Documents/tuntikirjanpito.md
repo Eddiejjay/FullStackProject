@@ -11,6 +11,6 @@
 |17.6      |5h    | Yatzy taulukon yksityiskohtaisempi suunnittelu, pisteidenlaskulogiikka |
 |17.6  | 4,5h    | Taulukon kirjoitus uudestaan, psiteiden lisäys toimii, reduceria päivitetty |
 | 18.6  |6h   |Pisteidenlaskulogiikan toteutus  |
-|       |    |  |
+|  18.6     |3h    |Nopat lisätty, vuorojärjestelmän suunnittelu, yleistä pohdintaa/suunnittelia mitä kannattaisi tehdä seuraavaksi, kokonaiskuvan hahmottaminen |
 |  |     |  |
-| yht   | 45,5 h   | | 
+| yht   | 48,5 h   | | 
