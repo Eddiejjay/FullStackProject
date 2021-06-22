@@ -12,5 +12,5 @@
 |17.6  | 4,5h    | Taulukon kirjoitus uudestaan, psiteiden lisäys toimii, reduceria päivitetty |
 | 18.6  |6h   |Pisteidenlaskulogiikan toteutus  |
 |  18.6     |3h    |Nopat lisätty, vuorojärjestelmän suunnittelu, yleistä pohdintaa/suunnittelia mitä kannattaisi tehdä seuraavaksi, kokonaiskuvan hahmottaminen |
-|  |     |  |
-| yht   | 48,5 h   | | 
+| 22.6|5h  |Sovelluksen toimintaa backendin kanssa testattu jsonServerin avulla. Toiminnallisuus jossa yatzy taulukon koko ja pelaajien nimet määräytyvät sen mukaan mitä nimiä "tietokannasta" löytyy aloitettu. Toiminnallisuus, jossa pisteenlasku serverobjekti luodaan osallistuvien pelaajien mukaan aloitettu|
+| yht   | 53,5 h   | | 
