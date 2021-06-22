@@ -47,7 +47,7 @@ const YatzyTable = () => {
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
       'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
-  const players = ['Keijo', 'Kalevi', 'Jorma']
+  const players = useSelector(state => state.players)
 
   // const playersFromStore = useSelector(state => state)
 
@@ -61,7 +61,7 @@ const YatzyTable = () => {
     setCombinationPlayer(arr)
   }
 
-  const allPoints = useSelector(state => state)
+  const allPoints = useSelector(state => state.points)
   console.log('allpoints in', allPoints)
 
   const readyClicked = () => {
