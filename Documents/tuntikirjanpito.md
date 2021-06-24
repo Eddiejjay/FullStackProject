@@ -13,4 +13,19 @@
 | 18.6  |6h   |Pisteidenlaskulogiikan toteutus  |
 |  18.6     |3h    |Nopat lisätty, vuorojärjestelmän suunnittelu, yleistä pohdintaa/suunnittelia mitä kannattaisi tehdä seuraavaksi, kokonaiskuvan hahmottaminen |
 | 22.6|5h  |Sovelluksen toimintaa backendin kanssa testattu jsonServerin avulla. Toiminnallisuus jossa yatzy taulukon koko ja pelaajien nimet määräytyvät sen mukaan mitä nimiä "tietokannasta" löytyy aloitettu. Toiminnallisuus, jossa pisteenlasku serverobjekti luodaan osallistuvien pelaajien mukaan aloitettu|
-| yht   | 53,5 h   | | 
+| 24.6| 8h  |Errorien ja bugien korjailua, React Router lisätty|
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| |  ||
+| yht   | 61,5 h   | | 
