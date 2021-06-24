@@ -1,13 +1,19 @@
 import axios from 'axios'
 
 
-const baseUrl = 'http://localhost:3001/PlayersAndPoints'
+const baseUrl = 'http://localhost:3003/PlayersAndPoints'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
-  console.log('perseee', response)
   return response.data
 }
+
+const deleteAll = async () => {
+  const response = await axios.delete(baseUrl/1)
+  console.log('deleteAll ', response.data)
+  return response.data
+}
+
 
 
 
@@ -15,8 +21,8 @@ const postPoints = async (player) => {
 
   const pointObject = {
     'points' : {
-      'ykkoset': 0,
-      'kakkoset': 0,
+      'ykkoset': 1,
+      'kakkoset': 2,
       'kolmoset': 0,
       'neloset': 0,
       'vitoset': 0,
@@ -44,4 +50,4 @@ const postPoints = async (player) => {
 }
 
 
-export default { getAll, postPoints }
+export default { getAll, postPoints, deleteAll }
