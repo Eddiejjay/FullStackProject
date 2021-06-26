@@ -79,14 +79,14 @@ const App = () => {
         <Link  to="/yatzy">yatzy</Link>
       </div>
       <Switch>
-        <Route path="/">
+        <Route path="/yatzy">
           <div>
             <h1>Yatzy</h1>
             <Dices></Dices>
             <YatzyTable></YatzyTable>
           </div>
         </Route>
-        <Route path="/yatzy">
+        <Route path="/">
           <div>
             <h1>Hello travelle, will you play game of yatzyHatsiMatsi with me´h ?</h1>
             <Home></Home>
