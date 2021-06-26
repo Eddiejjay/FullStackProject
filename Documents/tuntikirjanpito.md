@@ -14,7 +14,7 @@
 |  18.6     |3h    |Nopat lisätty, vuorojärjestelmän suunnittelu, yleistä pohdintaa/suunnittelia mitä kannattaisi tehdä seuraavaksi, kokonaiskuvan hahmottaminen |
 | 22.6|5h  |Sovelluksen toimintaa backendin kanssa testattu jsonServerin avulla. Toiminnallisuus jossa yatzy taulukon koko ja pelaajien nimet määräytyvät sen mukaan mitä nimiä "tietokannasta" löytyy aloitettu. Toiminnallisuus, jossa pisteenlasku serverobjekti luodaan osallistuvien pelaajien mukaan aloitettu|
 | 24.6| 8h  |Errorien ja bugien korjailua, React Router lisätty|
-| |  ||
+|26.6 |5h  |Backendin aloitus|
 | |  ||
 | |  ||
 | |  ||
