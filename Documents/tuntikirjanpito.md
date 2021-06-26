@@ -15,6 +15,7 @@
 | 22.6|5h  |Sovelluksen toimintaa backendin kanssa testattu jsonServerin avulla. Toiminnallisuus jossa yatzy taulukon koko ja pelaajien nimet määräytyvät sen mukaan mitä nimiä "tietokannasta" löytyy aloitettu. Toiminnallisuus, jossa pisteenlasku serverobjekti luodaan osallistuvien pelaajien mukaan aloitettu|
 | 24.6| 8h  |Errorien ja bugien korjailua, React Router lisätty|
 |26.6 |5h  |Backendin aloitus|
+| 26.6|5h  |Backend, Mognodb tietokannan lisääminen sovellukseen|
 | |  ||
 | |  ||
 | |  ||
@@ -27,5 +28,4 @@
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 66,5 h   | | 
+| yht   | 71,5 h   | | 
