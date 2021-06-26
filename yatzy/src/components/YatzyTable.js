@@ -47,7 +47,7 @@ const YatzyTable = () => {
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
       'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
-  const players = useSelector(state => state.players)
+  const players = useSelector(state => state.players).map(p => p.player)
 
   // const playersFromStore = useSelector(state => state)
 
