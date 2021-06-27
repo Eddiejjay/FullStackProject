@@ -16,6 +16,7 @@
 | 24.6| 8h  |Errorien ja bugien korjailua, React Router lisätty|
 |26.6 |5h  |Backendin aloitus|
 | 26.6|5h  |Backend, Mognodb tietokannan lisääminen sovellukseen|
+| 27.6|4,5h |Backend, Frontista YatzyTablen alustus bugi korjattu|
 | |  ||
 | |  ||
 | |  ||
@@ -27,5 +28,4 @@
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 71,5 h   | | 
+| yht   | 76 h   | | 
