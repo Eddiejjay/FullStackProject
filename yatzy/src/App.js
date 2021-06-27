@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom'
 import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
+import pointService from './services/pointService'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
 
@@ -20,10 +21,8 @@ import { initializePoints } from './reducers/pointsReducer'
 
 const App = () => {
 
-
   const dispatch = useDispatch()
   // const players = useSelector(state => state.players)
-
 
   useEffect(() => {
     dispatch(initializePlayers())
@@ -31,46 +30,9 @@ const App = () => {
     console.log('initplayers 1')
   }, [dispatch])
 
-  // const postPlayersPoints = async () => {
-  //   const players = await  playerService.getAll()
-  //   players.map(player => pointService.postPoints(player)
-  //   )}
-
-
-
-  // const initPoints = async () => {
-  //   await postPlayersPoints()
-  //   console.log('postPlayersPoints 2')
-  //   dispatch(initializePoints())
-
-  //   console.log('initializePoints 3')
-
-  // }
-
-  // initPoints()
-  // console.log('postplayerspoints 2')
-  // const points = pointService.getAll()
-  // console.log('points 3', points)
-
-
-  // console.log('Initialize points 4')
-  // console.log('Perseenreikä dispatch(initializeplayers 5')
-
-
-  // useEffect(() => {
-  //   dispatch(initializePoints())
-  // },[dispatch])
-
-
-  // Ongelmana että sivua uudelleen päivittäessä taulukon leveys tuplaantuu
-  // useEffect(() => {
-  // players.map(player => pointService.postPoints(player) )
-  //   console.log('players are ', players)
-  //   dispatch(initializePoints())
-
-  // }, [dispatch])
-
-
+  const deletePointsFromDb = () => {
+    pointService.deleteAll()
+  }
 
   return (
     <Router>
@@ -84,6 +46,7 @@ const App = () => {
             <h1>Yatzy</h1>
             <Dices></Dices>
             <YatzyTable></YatzyTable>
+            <button onClick = {deletePointsFromDb}>delete points from database</button>
           </div>
         </Route>
         <Route path="/">
@@ -105,3 +68,43 @@ const App = () => {
 
 
 export default App
+
+
+// const postPlayersPoints = async () => {
+//   const players = await  playerService.getAll()
+//   players.map(player => pointService.postPoints(player)
+//   )}
+
+
+
+// const initPoints = async () => {
+//   await postPlayersPoints()
+//   console.log('postPlayersPoints 2')
+//   dispatch(initializePoints())
+
+//   console.log('initializePoints 3')
+
+// }
+
+// initPoints()
+// console.log('postplayerspoints 2')
+// const points = pointService.getAll()
+// console.log('points 3', points)
+
+
+// console.log('Initialize points 4')
+// console.log('Perseenreikä dispatch(initializeplayers 5')
+
+
+// useEffect(() => {
+//   dispatch(initializePoints())
+// },[dispatch])
+
+
+// Ongelmana että sivua uudelleen päivittäessä taulukon leveys tuplaantuu
+// useEffect(() => {
+// players.map(player => pointService.postPoints(player) )
+//   console.log('players are ', players)
+//   dispatch(initializePoints())
+
+// }, [dispatch])

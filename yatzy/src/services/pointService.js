@@ -9,13 +9,14 @@ const getAll = async () => {
 }
 
 const deleteAll = async () => {
-  const response = await axios.delete(baseUrl/1)
+  const points = await getAll()
+  const response = await points.map(points => console.log('deelte', axios.delete(`${baseUrl}/${points.id}`)) )
   console.log('deleteAll ', response.data)
   return response.data
 }
 
 
-
+// axios.delete(baseUrl/`${points.id}`)
 
 const postPoints = async (player) => {
 
@@ -46,6 +47,7 @@ const postPoints = async (player) => {
 
   const response = await axios.post(baseUrl , pointObject)
   console.log('response dataaa', response.data)
+  return response.data
 
 }
 

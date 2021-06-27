@@ -3,11 +3,20 @@ import playerService from '../services/playerService'
 
 export const initializePoints = () => {
   return async dispatch => {
+    // 1.haetaan pelaajat playerservicestä TOIMII
     const players = await playerService.getAll()
+
     console.log('players reducerista ', players)
-    await players.map(player => pointService.postPoints(player))
+    //postataan pelaajien pisteet databaseen TOIMII
+    const done = await Promise.all(players.map(async player => await pointService.postPoints(player.player)))
+    // for (const player of players) {
+    //   const done = await pointService.postPoints(player.player)
+    //   console.log('done',done)
+    // }
+    console.log('done', done)
+    //haetaan pisteet poinservisestä EI TOIMI TÄYSIN teke suorittaa tämän liian aikaisin
     const points = await pointService.getAll()
-    console.log('pointsist reducerista', points)
+    console.log('piseet haettuna pointservicestä in reducer', points)
     dispatch ( {
       type: 'INITPOINTS',
       points : points
