@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addTurnsPoints }  from '../reducers/pointsReducer'
+import { nextTurn } from '../reducers/turnReducer'
 
 const StyledTable = styled.table `
     border-style: solid;
@@ -32,22 +33,14 @@ const ReadyButton = styled.button`
 
 const YatzyTable = () => {
   const dispatch = useDispatch()
-  // useStaten tarkoitus löytää oikea cell jota muutettu ja sen perusteella määritellä kenelle laitetut pisteet menevät ja mihin kohtaan
-  // tarvitsemme Combination kohdasta id:n joka kertoo mihin kohtaan pisteet menevät esim "ykköset"
-  // Lisäksi tarvitsemme tiedon pelaajasta jolle pisteet laitetaan esim "id jorma"
-  // tämän tiedon perusteella pisteet dispatchataan storeen
-  // ensin etsitään player jolle pisteet tulee playerid === id Jonka jälkeen etsitään oikea kohta Combination === Combination.id
-
-  //MITEN OIKEA KOHTA LÖYDETÄÄN?
-  //SE INPUT JOKA SUBMITOIDAAN SISÄLTÄÄ TIEDOISSAAN COMBINATIONIN JA PLAYERIN? NÄIN PÄÄSEME KÄSISKI TIETOON MIHIN PISTEET TALLENNETAAN
-
   const [combinationPlayer, setCombinationPlayer] = useState([])
-
   const properties =
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
       'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
   const players = useSelector(state => state.players).map(p => p.player)
+  const turn = useSelector(state => state.turn)
+  console.log('turn',turn)
 
   // const playersFromStore = useSelector(state => state)
 
@@ -67,7 +60,7 @@ const YatzyTable = () => {
     const combinationToAddPoints = combinationPlayer[0]
     const pointsToAdd = combinationPlayer[2]
     dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, Number(pointsToAdd)))
-
+    dispatch(nextTurn(turn.turn, turn.maxTurns))
   }
 
   const valisummaOnClick = () => {
@@ -105,6 +98,16 @@ const YatzyTable = () => {
             <Combination>{properties[0]}</Combination>
             {allPoints.map(points => points.points.ykkoset === 0 ?<td key = {'ykkosetinput'+points.player}><StyledInput name={[properties[0], points.player]} onChange={inputChange}/> </td> :<StyledCell name = {points.player} key = {'ykkoset'+points.player}> {points.points.ykkoset} </StyledCell>)}
           </StyledRow>
+
+
+
+
+          {/* {allPoints.map(points => points.points.ykkoset === 0 ?<td key = {'ykkosetinput'+points.player}><StyledInput name={[properties[0], points.player]} onChange={inputChange}/> </td> :<StyledCell name = {points.player} key = {'ykkoset'+points.player}> {points.points.ykkoset} </StyledCell>)} */}
+
+
+
+
+
 
           <StyledRow>
             <Combination>{properties[1]}</Combination>

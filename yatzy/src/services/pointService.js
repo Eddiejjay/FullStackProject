@@ -15,8 +15,17 @@ const deleteAll = async () => {
   return response.data
 }
 
+const updatePoints = async (player, combination, points) => {
+  const allPoints =  await getAll()
+  const serverObject = await allPoints.find(points => points.player === player)
+  const id = serverObject.id
+  const pointsOfOnePlayer = serverObject.points
+  pointsOfOnePlayer[combination]=points
+  const updatedServerObject = { ...serverObject, points:{ ...pointsOfOnePlayer } }
+  const response = await axios.put(`${baseUrl}/${id}`,updatedServerObject)
+  return response
+}
 
-// axios.delete(baseUrl/`${points.id}`)
 
 const postPoints = async (player) => {
 
@@ -52,4 +61,4 @@ const postPoints = async (player) => {
 }
 
 
-export default { getAll, postPoints, deleteAll }
+export default { getAll, postPoints, deleteAll, updatePoints }

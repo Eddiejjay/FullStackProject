@@ -13,6 +13,7 @@ import {
 import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
 import pointService from './services/pointService'
+import { initializeTurn } from './reducers/turnReducer'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
 
@@ -27,6 +28,7 @@ const App = () => {
   useEffect(() => {
     dispatch(initializePlayers())
     dispatch(initializePoints())
+    dispatch(initializeTurn())
     console.log('initplayers 1')
   }, [dispatch])
 

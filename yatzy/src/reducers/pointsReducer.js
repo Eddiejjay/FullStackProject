@@ -3,18 +3,14 @@ import playerService from '../services/playerService'
 
 export const initializePoints = () => {
   return async dispatch => {
-    // 1.haetaan pelaajat playerservicestä TOIMII
     const players = await playerService.getAll()
-
     console.log('players reducerista ', players)
-    //postataan pelaajien pisteet databaseen TOIMII
     const done = await Promise.all(players.map(async player => await pointService.postPoints(player.player)))
     // for (const player of players) {
     //   const done = await pointService.postPoints(player.player)
     //   console.log('done',done)
     // }
     console.log('done', done)
-    //haetaan pisteet poinservisestä EI TOIMI TÄYSIN teke suorittaa tämän liian aikaisin
     const points = await pointService.getAll()
     console.log('piseet haettuna pointservicestä in reducer', points)
     dispatch ( {
@@ -36,14 +32,17 @@ export const initializePoints = () => {
 
 
 export const addTurnsPoints = ( player, combination,points) => {
-  return {
-    type: 'ADDTURNSPOINTS',
-    player: player,
-    combination : combination,
-    points: points
+  return async dispatch => {
+    await pointService.updatePoints(player, combination, points)
+    dispatch ( {
+      type: 'ADDTURNSPOINTS',
+      player: player,
+      combination : combination,
+      points: points
+    }
+    )
   }
 }
-
 
 const pointsReducer = (state  = [], action) => {
   switch (action.type)

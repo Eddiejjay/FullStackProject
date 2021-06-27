@@ -5,12 +5,14 @@ import { Provider } from 'react-redux'
 import { createStore,  applyMiddleware, combineReducers } from 'redux'
 import pointsReducer from './reducers/pointsReducer'
 import playerReducer from './reducers/playerReducer'
+import turnReducer from './reducers/turnReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
 const reducer = combineReducers({
   points: pointsReducer,
-  players: playerReducer
+  players: playerReducer,
+  turn : turnReducer
 })
 
 const store = createStore(reducer,
