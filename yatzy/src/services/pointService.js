@@ -31,7 +31,7 @@ const postPoints = async (player) => {
 
   const pointObject = {
     'points' : {
-      'ykkoset': 1,
+      'ykkoset': 0,
       'kakkoset': 2,
       'kolmoset': 0,
       'neloset': 0,

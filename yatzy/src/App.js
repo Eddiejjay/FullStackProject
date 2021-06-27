@@ -27,8 +27,8 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializePlayers())
-    dispatch(initializePoints())
     dispatch(initializeTurn())
+    dispatch(initializePoints())
     console.log('initplayers 1')
   }, [dispatch])
 
