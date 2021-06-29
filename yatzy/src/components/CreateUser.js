@@ -1,28 +1,27 @@
 import React, { useState } from 'react'
-import { InitializeUser } from '../reducers/userReducer'
-import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import userService from '../services/userService'
 
 // import { InitializeUser } from '../reducers/userReducer'
 
 
-const Login= () => {
+const CreateUser = () => {
 
   const history = useHistory()
-  const dispatch = useDispatch()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const loginHandler = async (event) => {
     event.preventDefault()
 
-    const credentials = {
+    const newUser = {
       username : username,
       password : password
     }
-    console.log(credentials)
-    await dispatch(InitializeUser(credentials))
-    history.push('/yatzyroom')
+    console.log(newUser)
+    await userService.createUser(newUser)
+    history.push('/')
 
 
 
@@ -31,7 +30,7 @@ const Login= () => {
 
   return (
     <div>
-      <h2>log in to application</h2>
+      <h2>Create new user</h2>
 
       <form onSubmit = {loginHandler}>
         <div>
@@ -64,4 +63,4 @@ const Login= () => {
   )
 }
 
-export default Login
+export default CreateUser

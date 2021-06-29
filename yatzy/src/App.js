@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
 import YatzyRoom from './components/YatzyRoom'
+import CreateUser from './components/CreateUser'
 import { useDispatch, useSelector } from 'react-redux'
 // import { initializePoints }  from './reducers/pointsReducer'
 import { initializePlayers }  from './reducers/playerReducer'
@@ -10,9 +11,9 @@ import Dices from './components/Dices'
 // import playerService from './services/playerService'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Switch, Route, Link, Redirect
 } from 'react-router-dom'
-import Home from './components/Home'
+// import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
 import pointService from './services/pointService'
 import { initializeTurn } from './reducers/turnReducer'
@@ -37,6 +38,8 @@ const App = () => {
   }, [dispatch])
 
 
+
+
   const deletePointsFromDb = () => {
     pointService.deleteAll()
   }
@@ -46,10 +49,11 @@ const App = () => {
     <Router>
       <div>
         {user && <p>{user.username} logged in</p>}
-        <Link  to="/">home</Link>,
-        <Link  to="/yatzy">yatzy</Link>,
-        <Link  to="/yatzyroom">YatzyRoom</Link>,
-        {user === null && <Link to="/login">Login</Link>}
+        {/* <Link  to="/">home</Link>, */}
+        {/* <Link  to="/yatzy">yatzy</Link>, */}
+        {user && <Link  to="/yatzyroom">YatzyRoom</Link>}
+        {user === null && <Link to="/">Login</Link>}
+        {user === null && <Link to="/create">Create user</Link>}
 
 
       </div>
@@ -62,26 +66,29 @@ const App = () => {
             <button onClick = {deletePointsFromDb}>delete points from database</button>
           </div>
         </Route>
+        <Route path="/yatzyroom">
+          <div>
+            {user ? <YatzyRoom></YatzyRoom>: <Redirect to="/" />}
+          </div>
+        </Route>
 
-        <Route path="/login">
+        <Route path="/create">
+          <div>
+            <CreateUser></CreateUser>
+          </div>
+        </Route>
+        <Route path="/">
           <div>
             <Login></Login>
           </div>
         </Route>
-        <Route path="/yatzyroom">
-          <div>
-
-            <YatzyRoom></YatzyRoom>
-          </div>
-        </Route>
-
-        <Route path="/">
+        {/* <Route path="/">
           <div>
             <h1>Hello travelle, will you play game of yatzyHatsiMatsi with me´h ?</h1>
             <Home></Home>
             <Link  to="/yatzy">yatzy</Link>
           </div>
-        </Route>
+        </Route> */}
       </Switch>
 
 

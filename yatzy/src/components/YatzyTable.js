@@ -7,6 +7,8 @@ import { nextTurn } from '../reducers/turnReducer'
 
 const StyledTable = styled.table `
     border-style: solid;
+  
+    
 
     `
 const Combination = styled.td `

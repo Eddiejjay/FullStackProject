@@ -1,11 +1,11 @@
 
 
-import loginService from '../services/loginService'
+import userService from '../services/userService'
 
 export const InitializeUser = (credentials) => {
   return async (dispatch) => {
-    const user = await loginService.login(credentials)
-    console.log('user reduverista', user)
+    const user = await userService.login(credentials)
+    console.log('user reducerista eli servulta loginservice.login palautuksena', user)
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(user))
     dispatch ({
