@@ -19,6 +19,7 @@
 | 27.6|4,5h |Backend, Frontista YatzyTablen alustus bugi korjattu|
 | 27.6|4h  |vuorologiikan teko|
 | 29.6|5.5h  |login-toiminnon lisäys, routerin näkymien säätäminen|
+| 29.6|3.5  |create new user- toiminnon lisääminen, tyylien suunnittelua |
 | |  ||
 | |  ||
 | |  ||
@@ -27,5 +28,4 @@
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 85.5 h   | | 
+| yht   | 89 h   | | 
