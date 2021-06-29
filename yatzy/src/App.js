@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import YatzyTable from './components/YatzyTable'
-import { useDispatch } from 'react-redux'
+import Login from './components/Login'
+import YatzyRoom from './components/YatzyRoom'
+import { useDispatch, useSelector } from 'react-redux'
 // import { initializePoints }  from './reducers/pointsReducer'
 import { initializePlayers }  from './reducers/playerReducer'
 import Dices from './components/Dices'
@@ -23,6 +25,8 @@ import { initializeTurn } from './reducers/turnReducer'
 const App = () => {
 
   const dispatch = useDispatch()
+
+  const user = useSelector(state => state.user)
   // const players = useSelector(state => state.players)
 
   useEffect(() => {
@@ -32,15 +36,22 @@ const App = () => {
     console.log('initplayers 1')
   }, [dispatch])
 
+
   const deletePointsFromDb = () => {
     pointService.deleteAll()
   }
 
+
   return (
     <Router>
       <div>
-        <Link  to="/">home</Link>
-        <Link  to="/yatzy">yatzy</Link>
+        {user && <p>{user.username} logged in</p>}
+        <Link  to="/">home</Link>,
+        <Link  to="/yatzy">yatzy</Link>,
+        <Link  to="/yatzyroom">YatzyRoom</Link>,
+        {user === null && <Link to="/login">Login</Link>}
+
+
       </div>
       <Switch>
         <Route path="/yatzy">
@@ -51,10 +62,24 @@ const App = () => {
             <button onClick = {deletePointsFromDb}>delete points from database</button>
           </div>
         </Route>
+
+        <Route path="/login">
+          <div>
+            <Login></Login>
+          </div>
+        </Route>
+        <Route path="/yatzyroom">
+          <div>
+
+            <YatzyRoom></YatzyRoom>
+          </div>
+        </Route>
+
         <Route path="/">
           <div>
             <h1>Hello travelle, will you play game of yatzyHatsiMatsi with me´h ?</h1>
             <Home></Home>
+            <Link  to="/yatzy">yatzy</Link>
           </div>
         </Route>
       </Switch>
