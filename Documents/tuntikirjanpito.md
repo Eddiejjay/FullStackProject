@@ -20,6 +20,7 @@
 | 27.6|4h  |vuorologiikan teko|
 | 29.6|5.5h  |login-toiminnon lisäys, routerin näkymien säätäminen|
 | 29.6|3.5  |create new user- toiminnon lisääminen, tyylien suunnittelua |
+| 30.6|5h  |tyylien lisäilyä|
 | |  ||
 | |  ||
 | |  ||
@@ -27,5 +28,4 @@
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 89 h   | | 
+| yht   | 94 h   | | 
