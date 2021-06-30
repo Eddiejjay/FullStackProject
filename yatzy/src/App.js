@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
 import YatzyRoom from './components/YatzyRoom'
@@ -19,6 +20,7 @@ import pointService from './services/pointService'
 import { initializeTurn } from './reducers/turnReducer'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
+
 
 
 
@@ -44,55 +46,74 @@ const App = () => {
     pointService.deleteAll()
   }
 
+  const NavBar = styled.nav`
+  background : #7fad8b;
+  height : 80px;
+  display: flex;
+  justify-content: center;
+  font-size: 1.7rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 
+  }
+  `
+  const Container = styled.div`
+  align-content:space-evenly;
+  background-image: url('./images/yazyhazymazylogo.png');
+  background:00000;
+  `
   return (
-    <Router>
-      <div>
-        {user && <p>{user.username} logged in</p>}
-        {/* <Link  to="/">home</Link>, */}
-        {/* <Link  to="/yatzy">yatzy</Link>, */}
-        {user && <Link  to="/yatzyroom">YatzyRoom</Link>}
-        {user === null && <Link to="/">Login</Link>}
-        {user === null && <Link to="/create">Create user</Link>}
+    <Container>
+      <Router>
 
+        <NavBar>
+          {user && <p>{user.username} logged in</p>}
+          {/* <Link  to="/">home</Link>, */}
+          {/* <Link  to="/yatzy">yatzy</Link>, */}
+          {user && <Link  to="/yatzyroom">YatzyRoom</Link>}
+          {user === null && <Link to="/">Login</Link>}
+          {user === null && <Link to="/create">Create user</Link>}
 
-      </div>
-      <Switch>
-        <Route path="/yatzy">
-          <div>
-            <h1>Yatzy</h1>
-            <Dices></Dices>
-            <YatzyTable></YatzyTable>
-            <button onClick = {deletePointsFromDb}>delete points from database</button>
-          </div>
-        </Route>
-        <Route path="/yatzyroom">
-          <div>
-            {user ? <YatzyRoom></YatzyRoom>: <Redirect to="/" />}
-          </div>
-        </Route>
+        </NavBar>
 
-        <Route path="/create">
-          <div>
-            <CreateUser></CreateUser>
-          </div>
-        </Route>
-        <Route path="/">
-          <div>
-            <Login></Login>
-          </div>
-        </Route>
-        {/* <Route path="/">
+        <Switch>
+          <Route path="/yatzy">
+            <div>
+              <h1>Yatzy</h1>
+              <Dices></Dices>
+              <YatzyTable></YatzyTable>
+              <button onClick = {deletePointsFromDb}>delete points from database</button>
+            </div>
+          </Route>
+          <Route path="/yatzyroom">
+            <div>
+              {user ? <YatzyRoom></YatzyRoom>: <Redirect to="/" />}
+            </div>
+          </Route>
+
+          <Route path="/create">
+            <div>
+              <CreateUser></CreateUser>
+            </div>
+          </Route>
+          <Route path="/">
+            <div>
+              <Login></Login>
+            </div>
+          </Route>
+          {/* <Route path="/">
           <div>
             <h1>Hello travelle, will you play game of yatzyHatsiMatsi with me´h ?</h1>
             <Home></Home>
             <Link  to="/yatzy">yatzy</Link>
           </div>
         </Route> */}
-      </Switch>
+        </Switch>
 
 
-    </Router>
+      </Router>
+    </Container>
   )
 
 }

@@ -4,27 +4,47 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
+import logo from '../images/yazyhazymazylogo.png'
 
 const StyledTable = styled.table `
     border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    align-content:center;
+
   
     
 
     `
 const Combination = styled.td `
-    border: dotted;`
+    border: ridge;
+    background: #c8ccc9;`
 
 const StyledRow = styled.tr`
-      border-bottom: solid;`
+      border-style: ridge;`
 
 const StyledCell = styled.td `
-        border-style: solid;
-        padding : 5px;
+        border-style: ridge;
+        padding : 5px; 
+        width : 70px;   
+        font : cursive;
         
         `
 
+const LogoCell = styled.td `
+width: 40px;
+`
+const LogoImg = styled.img `
+width: 100px;
+`
+
 const StyledInput = styled.input`
-        width:50px;
+width : 65px;   
+        border-style: double;
+        &:hover {
+          background: #c8ccc9;
+          
+        }
 
         `
 const ReadyButton = styled.button`
@@ -32,13 +52,26 @@ const ReadyButton = styled.button`
       font-size: 20px;
     
     `
+const NameCell = styled.td `
+font-family: "Lucida Console", Monaco, monospace;
+font-size: 14px;
+letter-spacing: 0px;
+word-spacing: 0px;
+color: #000000;
+font-weight: 700;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: italic;
+font-variant: normal;
+text-transform: capitalize;
+background: #c8ccc9;
+    `
 
 const YatzyTable = () => {
   const dispatch = useDispatch()
   const [combinationPlayer, setCombinationPlayer] = useState([])
   const properties =
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
-      'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
+      'kolmesamaa','neljafont-size: 4vw;samaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
   const players = useSelector(state => state.players).map(p => p.player)
   const turn = useSelector(state => state.turn)
@@ -95,7 +128,7 @@ const YatzyTable = () => {
     <div>
       {/* <h2>{turn.player.player}n vuoro</h2> */}
       <StyledTable>
-        <tbody><tr><td></td>{players.map(player => <td key={'nimikentta'+player}>{player}</td>)}</tr>
+        <tbody><tr><LogoCell> <LogoImg src={logo} alt="Logo" />;</LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</tr>
 
           <StyledRow>
             <Combination>{properties[0]}</Combination>
