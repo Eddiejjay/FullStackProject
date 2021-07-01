@@ -5,29 +5,53 @@ import { useDispatch } from 'react-redux'
 import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
 import logo from '../images/yazyhazymazylogo.png'
+import { StyledButton, ButtonText } from './StyledComponents'
 
 const StyledTable = styled.table `
-    border-style: solid;
+
     margin-left: auto;
     margin-right: auto;
-    align-content:center;
+    display:flex;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 2rem;
+    border-collapse: collapse; 
 
   
     
 
     `
 const Combination = styled.td `
-    border: ridge;
-    background: #c8ccc9;`
+
+display:flex;
+justify-content:center;
+ color:white;
+ font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: 2px;
+word-spacing: 2px;
+
+font-weight: 700;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: italic;
+font-variant: small-caps;
+text-transform: capitalize;
+    `
 
 const StyledRow = styled.tr`
-      border-style: ridge;`
+
+
+border: 5px groove rgba(20,20,20,0.17);
+border-radius: 40px 40px 40px 40px;
+
+`
 
 const StyledCell = styled.td `
-        border-style: ridge;
         padding : 5px; 
         width : 70px;   
         font : cursive;
+        color: white;
+        font-size: 25px;
         
         `
 
@@ -41,37 +65,39 @@ width: 100px;
 const StyledInput = styled.input`
 width : 65px;   
         border-style: double;
+        background: transparent;
+        border: 3px groove rgba(164,164,164,0.17);
         &:hover {
-          background: #c8ccc9;
+          background: #fff0db;
           
         }
 
         `
-const ReadyButton = styled.button`
-      border-radius: 50%;
-      font-size: 20px;
-    
-    `
+// const ReadyButton = styled.button`
+//       border-radius: 50%;
+//       font-size: 20px;
+
+//     `
 const NameCell = styled.td `
-font-family: "Lucida Console", Monaco, monospace;
-font-size: 14px;
-letter-spacing: 0px;
-word-spacing: 0px;
-color: #000000;
+ color:white;
+ font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: 2px;
+word-spacing: 2px;
+
 font-weight: 700;
 text-decoration: none solid rgb(68, 68, 68);
 font-style: italic;
-font-variant: normal;
+font-variant: small-caps;
 text-transform: capitalize;
-background: #c8ccc9;
-    `
-
+padding: 10px;
+`
 const YatzyTable = () => {
   const dispatch = useDispatch()
   const [combinationPlayer, setCombinationPlayer] = useState([])
   const properties =
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
-      'kolmesamaa','neljafont-size: 4vw;samaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
+      'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
 
   const players = useSelector(state => state.players).map(p => p.player)
   const turn = useSelector(state => state.turn)
@@ -128,7 +154,7 @@ const YatzyTable = () => {
     <div>
       {/* <h2>{turn.player.player}n vuoro</h2> */}
       <StyledTable>
-        <tbody><tr><LogoCell> <LogoImg src={logo} alt="Logo" />;</LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</tr>
+        <tbody><StyledRow><LogoCell> <LogoImg src={logo} alt="Logo" />;</LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</StyledRow>
 
           <StyledRow>
             <Combination>{properties[0]}</Combination>
@@ -159,7 +185,7 @@ const YatzyTable = () => {
           <StyledRow>
             <Combination>{properties[6]}</Combination>
             {allPoints.map(points =>  <StyledCell name = {points.player} key = {'valisumma'+points.player}> {points.points.valisumma} </StyledCell>)}
-            <td><ReadyButton  onClick={valisummaOnClick}>laske</ReadyButton></td>
+            <td><StyledButton  onClick={valisummaOnClick}><ButtonText>Laske</ButtonText></StyledButton></td>
           </StyledRow>
 
           <StyledRow>
@@ -211,13 +237,13 @@ const YatzyTable = () => {
           <StyledRow>
             <Combination>{properties[17]}</Combination>
             {allPoints.map(points => <StyledCell name = {points.player} key = {'pisteet'+points.player}> {points.points.pisteet} </StyledCell>)}
-            <td><ReadyButton  onClick={allPointsOnClick}>laske</ReadyButton></td>
+            <td><StyledButton onClick={allPointsOnClick}><ButtonText>Laske</ButtonText></StyledButton></td>
           </StyledRow>
 
         </tbody>
       </StyledTable>
 
-      <ReadyButton onClick ={readyClicked}>Ready</ReadyButton>
+      <StyledButton onClick ={readyClicked}><ButtonText>Ready</ButtonText></StyledButton>
     </div>
 
   )

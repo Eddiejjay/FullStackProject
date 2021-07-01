@@ -10,17 +10,24 @@ import userReducer from './reducers/userReducer'
 import turnReducer from './reducers/turnReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-import logo from './images/yazyhazymazylogo.png'
+// import logo from './images/yazyhazymazylogo.png'
+import backgroundMountain from './images/background-mountain.jpg'
+// import backGroundHome from './images/background-home.jpg'
+
 
 
 const Container = styled.div`
-text-align: center;
+height:1300px;
+flex-direction: column;
 align-items: center;
-background:#cbf5ec;
-background-image: url(${logo});
-width: 2000px;
-height: 2000px;
+text-align: center;
+ background: url(${backgroundMountain})no-repeat center fixed; 
+ background-size: cover;
+
 `
+
+
+// background-size: contain;
 const reducer = combineReducers({
   points: pointsReducer,
   players: playerReducer,

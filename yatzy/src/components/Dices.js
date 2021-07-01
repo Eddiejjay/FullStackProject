@@ -1,19 +1,28 @@
 import React from 'react'
-import ReactDice from 'react-dice-complete'
-import 'react-dice-complete/dist/react-dice-complete.css'
-
+import Dice from 'react-dice-roll'
+import styled from 'styled-components'
 
 const Dices = () => {
 
 
-
+  const StyledDices = styled.div`
+  height:200px;
+  display:flex;
+  align-content: stretch;
+  justify-content: center;
+  gap: 3%;
+`
 
   return (
 
-    <div>
-      <ReactDice
-        numDice={5} />
-    </div>
+    <StyledDices>
+
+      <Dice size={100}></Dice>
+      <Dice size={100}></Dice>
+      <Dice size={100}></Dice>
+      <Dice size={100}></Dice>
+      <Dice size={100}></Dice>
+    </StyledDices>
   )
 }
 
