@@ -22,10 +22,10 @@
 | 29.6|3.5  |create new user- toiminnon lisääminen, tyylien suunnittelua |
 | 30.6|5h  |tyylien lisäilyä|
 |1.7 |7.5h  |tyylien jatkot|
+| 2.7|4h  |lisää tyylejä, socket.io alustus|
 | |  ||
 | |  ||
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 101.5 h   | | 
+| yht   | 105.5 h   | | 
