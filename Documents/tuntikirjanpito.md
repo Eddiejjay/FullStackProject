@@ -21,11 +21,11 @@
 | 29.6|5.5h  |login-toiminnon lisäys, routerin näkymien säätäminen|
 | 29.6|3.5  |create new user- toiminnon lisääminen, tyylien suunnittelua |
 | 30.6|5h  |tyylien lisäilyä|
+|1.7 |7.5h  |tyylien jatkot|
 | |  ||
 | |  ||
 | |  ||
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 94 h   | | 
+| yht   | 101.5 h   | | 
