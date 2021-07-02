@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { io } from 'socket.io-client'
 import styled from 'styled-components'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
@@ -29,7 +30,9 @@ import { initializeTurn } from './reducers/turnReducer'
 
 const App = () => {
 
+  const socket = io('http://localhost:3003')
   const dispatch = useDispatch()
+  console.log(socket)
 
   const user = useSelector(state => state.user)
   // const players = useSelector(state => state.players)

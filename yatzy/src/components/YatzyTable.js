@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
-import logo from '../images/yazyhazymazylogo.png'
+// import logo from '../images/yazyhazymazylogo.png'
 import { StyledButton, ButtonText } from './StyledComponents'
 
 const StyledTable = styled.table `
@@ -58,9 +58,9 @@ const StyledCell = styled.td `
 const LogoCell = styled.td `
 width: 40px;
 `
-const LogoImg = styled.img `
-width: 100px;
-`
+// const LogoImg = styled.img `
+// width: 100px;
+// `
 
 const StyledInput = styled.input`
 width : 65px;   
@@ -84,7 +84,6 @@ const NameCell = styled.td `
 font-size: 25px;
 letter-spacing: 2px;
 word-spacing: 2px;
-
 font-weight: 700;
 text-decoration: none solid rgb(68, 68, 68);
 font-style: italic;
@@ -92,6 +91,7 @@ font-variant: small-caps;
 text-transform: capitalize;
 padding: 10px;
 `
+// border-left: 3px groove rgba(20,20,20,0.17);
 const YatzyTable = () => {
   const dispatch = useDispatch()
   const [combinationPlayer, setCombinationPlayer] = useState([])
@@ -154,7 +154,7 @@ const YatzyTable = () => {
     <div>
       {/* <h2>{turn.player.player}n vuoro</h2> */}
       <StyledTable>
-        <tbody><StyledRow><LogoCell> <LogoImg src={logo} alt="Logo" />;</LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</StyledRow>
+        <tbody><StyledRow><LogoCell></LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</StyledRow>
 
           <StyledRow>
             <Combination>{properties[0]}</Combination>

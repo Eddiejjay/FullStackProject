@@ -17,7 +17,7 @@ import backgroundMountain from './images/background-mountain.jpg'
 
 
 const Container = styled.div`
-height:1300px;
+height:1400px;
 flex-direction: column;
 align-items: center;
 text-align: center;
