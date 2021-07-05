@@ -23,9 +23,9 @@
 | 30.6|5h  |tyylien lisäilyä|
 |1.7 |7.5h  |tyylien jatkot|
 | 2.7|4h  |lisää tyylejä, socket.io alustus|
+| 3-5.7|11,5h  |socket.io|
 | |  ||
 | |  ||
 | |  ||
 | |  ||
-| |  ||
-| yht   | 105.5 h   | | 
+| yht   | 117 h   | | 
