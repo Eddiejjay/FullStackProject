@@ -8,6 +8,7 @@ import pointsReducer from './reducers/pointsReducer'
 import playerReducer from './reducers/playerReducer'
 import userReducer from './reducers/userReducer'
 import turnReducer from './reducers/turnReducer'
+import onlineUsersReducer from './reducers/onlineUsersReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 // import logo from './images/yazyhazymazylogo.png'
@@ -32,7 +33,8 @@ const reducer = combineReducers({
   points: pointsReducer,
   players: playerReducer,
   turn : turnReducer,
-  user : userReducer
+  user : userReducer,
+  onlineUsers : onlineUsersReducer
 })
 
 const store = createStore(reducer,

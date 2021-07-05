@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { io } from 'socket.io-client'
 import styled from 'styled-components'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
@@ -20,6 +19,9 @@ import {
 import { initializePoints } from './reducers/pointsReducer'
 import pointService from './services/pointService'
 import { initializeTurn } from './reducers/turnReducer'
+import { socket } from './services/socketService'
+import { addOnlineUser } from './reducers/onlineUsersReducer'
+// import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
@@ -30,9 +32,15 @@ import { initializeTurn } from './reducers/turnReducer'
 
 const App = () => {
 
-  const socket = io('http://localhost:3003')
   const dispatch = useDispatch()
   console.log(socket)
+
+  //socket.on kuuntelee servulta tulevaa vastausta
+  socket.on('online-user-back-to-all', username => {
+    console.log('username clientside vastaan otto takaisin servulta')
+    dispatch(addOnlineUser(username))
+    // dispatch(addOnlineUser(username))
+  })
 
   const user = useSelector(state => state.user)
   // const players = useSelector(state => state.players)

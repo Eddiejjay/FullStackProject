@@ -1,11 +1,13 @@
 
 
 import userService from '../services/userService'
+import { addOnlineUserSocket } from '../services/socketService'
 
 export const InitializeUser = (credentials) => {
   return async (dispatch) => {
     const user = await userService.login(credentials)
-    console.log('user reducerista eli servulta loginservice.login palautuksena', user)
+    console.log('userobject', user)
+    addOnlineUserSocket(user.username)
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(user))
     dispatch ({
