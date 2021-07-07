@@ -3,6 +3,7 @@ import { InitializeUser } from '../reducers/userReducer'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
+import { socket } from '../services/socketService'
 
 // import { InitializeUser } from '../reducers/userReducer'
 
@@ -64,6 +65,8 @@ const Login= () => {
     const loggedInUser = await dispatch(InitializeUser(credentials))
     console.log('loggedinuser = ', loggedInUser)
     history.push('/yatzyroom')
+
+    socket.emit('joined-yatzyroom', credentials.username)
   }
 
   return (
