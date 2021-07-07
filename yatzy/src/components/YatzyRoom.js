@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import Chat from './Chat'
 
 
 const YatzyRoom = () => {
@@ -16,6 +17,7 @@ const YatzyRoom = () => {
     <div>
       <h1> Welcome to YatzyRoom</h1>
       <button onClick ={playYatzyClicked}>Play YatzyHatsiMatsi</button>
+      <Chat></Chat>
     </div>
   )
 }

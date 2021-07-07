@@ -61,7 +61,8 @@ const Login= () => {
       password : password
     }
     console.log(credentials)
-    await dispatch(InitializeUser(credentials))
+    const loggedInUser = await dispatch(InitializeUser(credentials))
+    console.log('loggedinuser = ', loggedInUser)
     history.push('/yatzyroom')
   }
 
@@ -75,7 +76,7 @@ const Login= () => {
           <UserInput
             id = 'username'
             type= "text"
-            valupdateue = {username}
+            value = {username}
             name = "Username"
             onChange = {(event) => setUsername(event.target.value)}
           />

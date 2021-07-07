@@ -13,7 +13,7 @@ import Dices from './components/Dices'
 // import playerService from './services/playerService'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, Redirect
+  Switch, Route, Link
 } from 'react-router-dom'
 // import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
@@ -39,7 +39,10 @@ const App = () => {
   socket.on('online-user-back-to-all', username => {
     console.log('username clientside vastaan otto takaisin servulta')
     dispatch(addOnlineUser(username))
-    // dispatch(addOnlineUser(username))
+  })
+
+  socket.on('delete-user-from-players-in-lobby',(socketId) => {
+    console.log('userDELETED FROM lobbylist iwth id ', socketId)
   })
 
   const user = useSelector(state => state.user)
@@ -96,7 +99,8 @@ const App = () => {
         <StyledLink>  <Link to="/">Home</Link></StyledLink>
         {user && <p>{user.username} logged in</p>}
         {/* <Link  to="/">home</Link>, */}
-        {/* <Link  to="/yatzy">yatzy</Link>, */}
+        <Link  to="/yatzy">yatzy</Link>,
+        <StyledLink><Link  to="/yatzyroom">YatzyRoom</Link></StyledLink>
         {user && <StyledLink><Link  to="/yatzyroom">YatzyRoom</Link></StyledLink>}
         {user === null && <StyledLink><Link to="/login">Login</Link></StyledLink>}
         {user === null && <StyledLink><Link to="/create">Create user</Link></StyledLink>}
@@ -114,9 +118,10 @@ const App = () => {
           </div>
         </Route>
         <Route path="/yatzyroom">
-          <div>
+          {/* <div>
             {user ? <YatzyRoom></YatzyRoom>: <Redirect to="/" />}
-          </div>
+          </div> */}
+          <YatzyRoom></YatzyRoom>
         </Route>
 
         <Route path="/create">
