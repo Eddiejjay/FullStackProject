@@ -1,5 +1,6 @@
 import pointService from '../services/pointService'
 import playerService from '../services/playerService'
+// import { socket } from '../services/socketService'
 
 export const initializePoints = () => {
   return async dispatch => {
@@ -33,6 +34,7 @@ export const initializePoints = () => {
 
 export const addTurnsPoints = ( player, combination,points) => {
   return async dispatch => {
+    // socket.emit('turn-ready', player, combination, points)
     await pointService.updatePoints(player, combination, points)
     dispatch ( {
       type: 'ADDTURNSPOINTS',

@@ -34,3 +34,15 @@ export const ButtonText = styled.div `
  font-style: italic;
  font-variant: small-caps;
  text-transform: capitalize;`
+
+export const StyledInput = styled.input`
+width : 900x;   
+        border-style: double;
+        background: transparent;
+        border: 3px groove rgba(164,164,164,0.17);
+        &:hover {
+          background: #fff0db;
+          
+        }
+
+        `

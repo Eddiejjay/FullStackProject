@@ -6,6 +6,7 @@ import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
 // import logo from '../images/yazyhazymazylogo.png'
 import { StyledButton, ButtonText } from './StyledComponents'
+import { socket } from '../services/socketService'
 
 const StyledTable = styled.table `
 
@@ -121,6 +122,12 @@ const YatzyTable = () => {
     const combinationToAddPoints = combinationPlayer[0]
     const pointsToAdd = combinationPlayer[2]
     dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, Number(pointsToAdd)))
+
+    socket.emit('turn-ready', playerToAddPoints, combinationToAddPoints, pointsToAdd)
+    socket.on('turns-stats',(player, combination, points) => {
+      dispatch(addTurnsPoints(player, combination, Number(points)))
+    })
+
     dispatch(nextTurn(turn.turn, turn.maxTurns))
   }
 
@@ -244,6 +251,7 @@ const YatzyTable = () => {
       </StyledTable>
 
       <StyledButton onClick ={readyClicked}><ButtonText>Ready</ButtonText></StyledButton>
+
     </div>
 
   )

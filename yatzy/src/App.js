@@ -21,6 +21,7 @@ import pointService from './services/pointService'
 import { initializeTurn } from './reducers/turnReducer'
 import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
+import YatzyChat from './components/YatzyChat'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
 // import pointService from './services/pointService'
@@ -37,12 +38,17 @@ const App = () => {
 
   //socket.on kuuntelee servulta tulevaa vastausta
   socket.on('online-user-back-to-all', username => {
+    // console.log('socet.data.usrname', socket.data.username)
     console.log('username clientside vastaan otto takaisin servulta')
     dispatch(addOnlineUser(username))
   })
 
   socket.on('delete-user-from-players-in-lobby',(socketId) => {
     console.log('userDELETED FROM lobbylist iwth id ', socketId)
+  })
+
+  socket.on('sockets-yatzy-room',(sockets) => {
+    console.log('sockets in yatzyroom client ', sockets)
   })
 
 
@@ -65,6 +71,15 @@ const App = () => {
     pointService.deleteAll()
   }
 
+
+  const Container = styled.div `
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding:10px;
+
+  `
   const NavBar = styled.nav`
   display: flex;
   flex-direction: row;
@@ -92,6 +107,12 @@ const App = () => {
   // height:200px
   // `
 
+
+  const startGameClicked = () => {
+
+    console.log('Start game')
+  }
+
   return (
 
     <Router>
@@ -112,12 +133,16 @@ const App = () => {
 
       <Switch>
         <Route path="/yatzy">
-          <div>
-            <h1>Yatzy</h1>
-            <Dices></Dices>
+
+          <h1>Yatzy</h1>
+          <Dices></Dices>
+          <Container>
             <YatzyTable></YatzyTable>
-            <button onClick = {deletePointsFromDb}>delete points from database</button>
-          </div>
+            <YatzyChat></YatzyChat>
+            <button onClick = {startGameClicked}>Start Game</button>
+          </Container>
+          <button onClick = {deletePointsFromDb}>delete points from database</button>
+
         </Route>
         <Route path="/yatzyroom">
           {/* <div>

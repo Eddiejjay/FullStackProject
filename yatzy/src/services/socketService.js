@@ -8,5 +8,9 @@ export const addOnlineUserSocket = (username) => {
   console.log('socketsrvicestaä added ', username)
 }
 
+export const addUserInPrivateYatzyRoom = (username) => {
+  socket.emit('add-private-room-user', username)
+  console.log('private-user added ', username)
+}
 
-export default { addOnlineUserSocket }
+export default { addOnlineUserSocket, addUserInPrivateYatzyRoom }

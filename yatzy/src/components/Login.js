@@ -67,6 +67,7 @@ const Login= () => {
     history.push('/yatzyroom')
 
     socket.emit('joined-yatzyroom', credentials.username)
+
   }
 
   return (
