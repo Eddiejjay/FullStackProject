@@ -12,16 +12,21 @@ const Dices = () => {
   justify-content: center;
   gap: 3%;
 `
-
+  const rollDice = () => {
+    const press =  new KeyboardEvent('keypress',{ 'key':'Enter' })
+    console.log('press',press)
+  }
   return (
 
     <StyledDices>
 
       <Dice size={100}></Dice>
+      <Dice triggers= {['Enter','click', rollDice() ]} onRoll={(value) => console.log(value)} />
       <Dice size={100}></Dice>
       <Dice size={100}></Dice>
       <Dice size={100}></Dice>
       <Dice size={100}></Dice>
+      <button onClick = {rollDice}>Roll dice</button>
     </StyledDices>
   )
 }

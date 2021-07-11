@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
@@ -56,12 +56,12 @@ const App = () => {
   const user = useSelector(state => state.user)
   // const players = useSelector(state => state.players)
 
-  useEffect(() => {
-    dispatch(initializePlayers())
-    dispatch(initializeTurn())
-    dispatch(initializePoints())
-    console.log('initplayers 1')
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(initializePlayers())
+  //   dispatch(initializeTurn())
+  //   dispatch(initializePoints())
+  //   console.log('initplayers 1')
+  // }, [dispatch])
 
 
 
@@ -109,9 +109,16 @@ const App = () => {
 
 
   const startGameClicked = () => {
+    socket.emit('give-private-players')
 
-    console.log('Start game')
   }
+
+  socket.on('players-in-private-yatzyroom', players => {
+    console.log('players app.js clientista',players )
+    dispatch(initializePlayers(players))
+    dispatch(initializeTurn(players))
+    dispatch(initializePoints(players))
+  })
 
   return (
 

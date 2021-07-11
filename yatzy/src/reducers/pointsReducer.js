@@ -1,22 +1,22 @@
 import pointService from '../services/pointService'
-import playerService from '../services/playerService'
+// import playerService from '../services/playerService'
 // import { socket } from '../services/socketService'
 
-export const initializePoints = () => {
+export const initializePoints = (players) => {
   return async dispatch => {
-    const players = await playerService.getAll()
+    // const players = await playerService.getAll()
     console.log('players reducerista ', players)
-    const done = await Promise.all(players.map(async player => await pointService.postPoints(player.player)))
+    const done = await Promise.all(players.map(async player => await pointService.postPoints(player)))
     // for (const player of players) {
     //   const done = await pointService.postPoints(player.player)
     //   console.log('done',done)
     // }
     console.log('done', done)
-    const points = await pointService.getAll()
-    console.log('piseet haettuna pointservicestä in reducer', points)
+    // const points = await pointService.getAll()
+    // console.log('piseet haettuna pointservicestä in reducer', points)
     dispatch ( {
       type: 'INITPOINTS',
-      points : points
+      points : done
 
     })}}
 
