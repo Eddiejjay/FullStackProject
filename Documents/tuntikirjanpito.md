@@ -24,8 +24,17 @@
 |1.7 |7.5h  |tyylien jatkot|
 | 2.7|4h  |lisää tyylejä, socket.io alustus|
 | 3-5.7|11,5h  |socket.io|
+| 7.7 |chat toiminnon lisäys lobbyyn ja private peliin  |6h|
+| 8.7|socket.io players in lobby toiminto + säätöä |4h|
+| 10.7  | socket io yatzy tablen alustus siten että se muokkautuu privateyatzyroomissa olevien mukaan|6,5h|
+|11.7 |yatzytablen alustus jatkot, pisteiden päivitys kaikille socketeille pelissä, noppien pyörimisen näkyminen kaikille suunnittelu|6h|
+
+
+
+
+
 | |  ||
 | |  ||
 | |  ||
 | |  ||
-| yht   | 117 h   | | 
+| yht   | 139,5 h   | | 
