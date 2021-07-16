@@ -19,6 +19,11 @@ margin: 10px;
 padding:0x;
 background: transparent;
 border: 5px groove rgba(20,20,20,0.17);
+&:hover {
+  background: 	rgb(255,240,219,0.5)
+  
+}
+
 
 `
 export const ButtonText = styled.div `
@@ -36,13 +41,16 @@ export const ButtonText = styled.div `
  text-transform: capitalize;`
 
 export const StyledInput = styled.input`
-width : 900x;   
-        border-style: double;
-        background: transparent;
-        border: 3px groove rgba(164,164,164,0.17);
-        &:hover {
-          background: #fff0db;
-          
-        }
 
-        `
+padding:6px;
+font-size: 25px;
+border-width: 0px;
+box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+   background: transparent;
+   border: 5px groove rgba(20,20,20,0.17);
+   &:hover {
+    background: rgb(250, 249, 249,0.4)
+    
+  }
+   
+`

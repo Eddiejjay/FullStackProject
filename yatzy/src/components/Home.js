@@ -1,8 +1,10 @@
 import React from 'react'
+// import backgroundLogo from '../images/yazyhazymazylogo.png'
 import {
   useHistory
 } from 'react-router-dom'
 import styled from 'styled-components'
+import { StyledButton, Text } from './StyledComponents'
 // import backgroundHome from '../images/background-home.jpg'
 // import { useDispatch } from 'react-redux'
 // import { initializePoints } from '../reducers/pointsReducer'
@@ -14,6 +16,7 @@ import styled from 'styled-components'
 
 
 // `
+
 
 const Home = () => {
 //   const dispatch = useDispatch()
@@ -29,15 +32,20 @@ const Home = () => {
     history.push('/create')
   }
   const HomeContainer = styled.div`
-color:green;
-   
-`
-
+  height:1400px;
+  margin: 300px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+   background-size: cover;
+  
+  `
   return (
-
     <HomeContainer>
-      <button onClick = {clicked}>Login</button>
-      <button onClick = {clicked2}>Create user</button>
+      <Text> Hello friend, welcome to this multiplayer yatzyhazymazy</Text>
+      <Text> Please log in or create a new user</Text>
+      <StyledButton onClick = {clicked}><Text>Login</Text></StyledButton>
+      <StyledButton onClick = {clicked2}><Text>Create user</Text></StyledButton>
     </HomeContainer>
   )
 }

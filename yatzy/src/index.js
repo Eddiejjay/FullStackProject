@@ -13,6 +13,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 // import logo from './images/yazyhazymazylogo.png'
 import backgroundMountain from './images/background-mountain.jpg'
+import diceReducer from './reducers/diceReducer'
 // import backGroundHome from './images/background-home.jpg'
 
 
@@ -34,7 +35,8 @@ const reducer = combineReducers({
   players: playerReducer,
   turn : turnReducer,
   user : userReducer,
-  onlineUsers : onlineUsersReducer
+  onlineUsers : onlineUsersReducer,
+  dice : diceReducer
 })
 
 const store = createStore(reducer,

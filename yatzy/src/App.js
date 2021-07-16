@@ -22,12 +22,11 @@ import { initializeTurn } from './reducers/turnReducer'
 import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
+// import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
-
-
 
 
 
@@ -54,6 +53,9 @@ const App = () => {
 
 
   const user = useSelector(state => state.user)
+
+  const dice = useSelector(state => state.dice)
+  console.log('dice appista',dice)
   // const players = useSelector(state => state.players)
 
   // useEffect(() => {
@@ -83,8 +85,8 @@ const App = () => {
   const NavBar = styled.nav`
   display: flex;
   flex-direction: row;
+  background: rgba(7,7,7, 0.1);
   justify-content: space-around;
-  background : #d8c690;
   height : 45px;
  
   `
@@ -100,12 +102,32 @@ const App = () => {
   font-variant: normal;
   text-transform: none;
   padding: 10px;
+   textDecoration: 'none';
+   &:hover {
+    background: rgb(255,240,219,0.5)
+    
+  }
 
     `
   // const StyledImg = styled.img`
   // width: 200px;
   // height:200px
   // `
+
+  const Text = styled.div `
+  padding: 0px;
+  color:white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+ font-size: 25px;
+ letter-spacing: 2px;
+ word-spacing: 2px;
+ font-weight: 700;
+ text-decoration: none solid rgb(68, 68, 68);
+ font-style: italic;
+ font-variant: small-caps;
+ text-transform: capitalize;`
+
+
 
 
   const startGameClicked = () => {
@@ -126,14 +148,15 @@ const App = () => {
 
       <NavBar>
 
-        <StyledLink>  <Link to="/">Home</Link></StyledLink>
-        {user && <p>{user.username} logged in</p>}
+        <StyledLink>  <Link style={{ textDecoration: 'none' }} to="/"><Text>Home</Text></Link></StyledLink>
+
+        {user && <Text>{user.username} logged in</Text>}
         {/* <Link  to="/">home</Link>, */}
-        <Link  to="/yatzy">yatzy</Link>,
-        <StyledLink><Link  to="/yatzyroom">YatzyRoom</Link></StyledLink>
-        {user && <StyledLink><Link  to="/yatzyroom">YatzyRoom</Link></StyledLink>}
-        {user === null && <StyledLink><Link to="/login">Login</Link></StyledLink>}
-        {user === null && <StyledLink><Link to="/create">Create user</Link></StyledLink>}
+        {/* <Link  to="/yatzy">yatzy</Link>, */}
+        {/* <StyledLink><Link  to="/yatzyroom"><Text>Yatzyroom</Text></Link></StyledLink> */}
+        {user && <StyledLink><Link style={{ textDecoration: 'none' }}  to="/yatzyroom"><Text>Yatzyroom</Text></Link></StyledLink>}
+        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }}to="/login"><Text>Login</Text></Link></StyledLink>}
+        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }} to="/create"><Text>Create user</Text></Link></StyledLink>}
         {/* <StyledImg src={logo} alt="Logo" /> */}
 
       </NavBar>
@@ -189,48 +212,4 @@ const App = () => {
 
 }
 
-
-
-
-
 export default App
-
-
-// const postPlayersPoints = async () => {
-//   const players = await  playerService.getAll()
-//   players.map(player => pointService.postPoints(player)
-//   )}
-
-
-
-// const initPoints = async () => {
-//   await postPlayersPoints()
-//   console.log('postPlayersPoints 2')
-//   dispatch(initializePoints())
-
-//   console.log('initializePoints 3')
-
-// }
-
-// initPoints()
-// console.log('postplayerspoints 2')
-// const points = pointService.getAll()
-// console.log('points 3', points)
-
-
-// console.log('Initialize points 4')
-// console.log('Perseenreikä dispatch(initializeplayers 5')
-
-
-// useEffect(() => {
-//   dispatch(initializePoints())
-// },[dispatch])
-
-
-// Ongelmana että sivua uudelleen päivittäessä taulukon leveys tuplaantuu
-// useEffect(() => {
-// players.map(player => pointService.postPoints(player) )
-//   console.log('players are ', players)
-//   dispatch(initializePoints())
-
-// }, [dispatch])

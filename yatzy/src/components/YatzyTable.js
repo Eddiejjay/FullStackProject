@@ -106,6 +106,18 @@ const YatzyTable = () => {
 
   // const playersFromStore = useSelector(state => state)
 
+  socket.on('turns-stats',(player, combination, points) => {
+    dispatch(addTurnsPoints(player, combination, Number(points)))
+    dispatch(nextTurn(players, turn.turn, turn.maxTurns))
+  })
+
+  socket.on('valisummaPoints',(allPoints) => {
+    console.log('valsummaallPoisnts', allPoints)
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+
+  })
+
 
   const inputChange = (event) => {
     event.preventDefault()
@@ -123,17 +135,24 @@ const YatzyTable = () => {
     const pointsToAdd = combinationPlayer[2]
     dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, Number(pointsToAdd)))
 
-    socket.emit('turn-ready', playerToAddPoints, combinationToAddPoints, pointsToAdd)
-    socket.on('turns-stats',(player, combination, points) => {
-      dispatch(addTurnsPoints(player, combination, Number(points)))
-    })
-
+    socket.emit('turn-ready', playerToAddPoints, combinationToAddPoints, pointsToAdd, turn.turn, turn.maxturns)
+    // socket.on('turns-stats',(player, combination, points) => {
+    //   dispatch(addTurnsPoints(player, combination, Number(points)))
+    // })
     dispatch(nextTurn(players, turn.turn, turn.maxTurns))
   }
 
   const valisummaOnClick = () => {
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+
+    socket.emit('valisumma-calculation', allPoints)
+    // socket.on('valisummaPoints',(allPoints) => {
+    //   allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
+    //   allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+
+    // })
+
   }
 
   const allPointsOnClick = () => {

@@ -16,6 +16,10 @@ box-shadow: 0px 0px 5px rgba(66,66,66,.75);
 text-shadow: 0px 0px 5px rgba(66,66,66,.75);
    background: transparent;
    border: 5px groove rgba(20,20,20,0.17);
+   &:hover {
+    background: rgb(250, 249, 249,0.4)
+    
+  }
    
 `
 const LoginCointainer = styled.div`
@@ -41,6 +45,10 @@ margin: 10px;
 padding:0x;
 background: transparent;
 border: 5px groove rgba(20,20,20,0.17);
+&:hover {
+  background: rgb(250, 249, 249,0.4)
+  
+}
 
 `
 

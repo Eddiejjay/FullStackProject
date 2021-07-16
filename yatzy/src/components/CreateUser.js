@@ -5,16 +5,48 @@ import styled from 'styled-components'
 
 // import { InitializeUser } from '../reducers/userReducer'
 const UserInput = styled.input `
-padding: 9px;
-   font-size: 30px;
-   border-width: 7px;
-   border-color: #0087c7;
-   background-color: #ffffff;
-   color: #0c0b0b;
-   border-style: double;
-   border-radius: 50px;
-   box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+
+padding:6px;
+font-size: 25px;
+border-width: 0px;
+box-shadow: 0px 0px 5px rgba(66,66,66,.75);
+text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+   background: transparent;
+   border: 5px groove rgba(20,20,20,0.17);
+   &:hover {
+    background: rgb(250, 249, 249,0.4)
+    
+  }
    
+`
+const CreateUserCointainer = styled.div`
+padding:100px;
+
+`
+const Text = styled.div `
+  padding: 12px;
+  color:white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+ font-size: 25px;
+ letter-spacing: 2px;
+ word-spacing: 2px;
+ 
+ font-weight: 700;
+ text-decoration: none solid rgb(68, 68, 68);
+ font-style: italic;
+ font-variant: small-caps;
+ text-transform: capitalize;`
+
+const StyledButton = styled.button `
+margin: 10px;
+padding:0x;
+background: transparent;
+border: 5px groove rgba(20,20,20,0.17);
+&:hover {
+  background: rgb(250, 249, 249,0.4)
+  
+}
+
 `
 
 const CreateUser = () => {
@@ -41,12 +73,12 @@ const CreateUser = () => {
   }
 
   return (
-    <div>
-      <h2>Create new user</h2>
+    <CreateUserCointainer>
+      <Text>Create new user</Text>
 
       <form onSubmit = {loginHandler}>
         <div>
-    username
+          <Text>Username</Text>
           <UserInput
             id = 'username'
             type= "text"
@@ -56,7 +88,7 @@ const CreateUser = () => {
           />
         </div>
         <div>
-    password
+          <Text>Password</Text>
           <UserInput
             id = 'password'
             type= "text"
@@ -68,10 +100,10 @@ const CreateUser = () => {
           />
         </div>
 
-        <button id = "login-button" type = "submit" >login</button>
+        <StyledButton id = "login-button" type = "submit" ><Text>Create</Text></StyledButton>
 
       </form>
-    </div>
+    </CreateUserCointainer>
   )
 }
 

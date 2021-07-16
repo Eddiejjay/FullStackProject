@@ -3,10 +3,9 @@ import { socket } from '../services/socketService'
 import { useHistory } from 'react-router-dom'
 import { addUserInPrivateYatzyRoom  } from '../services/socketService'
 
-import { StyledInput, StyledButton } from './StyledComponents'
+
+import { StyledInput, StyledButton, Text } from './StyledComponents'
 import { useSelector } from 'react-redux'
-
-
 
 const JoinPrivateYatzyRoom = () => {
   const [inputValue, setInputValue] = useState('')
@@ -24,7 +23,7 @@ const JoinPrivateYatzyRoom = () => {
 
   return (
     <div>
-      <h2>Create private YatzyRoom</h2>
+      <Text>Create private YatzyRoom</Text>
       <StyledInput  onChange = {(event) => setInputValue(event.target.value)}
         id = 'inputValue'
         type= "text"
