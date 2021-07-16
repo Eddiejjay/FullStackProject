@@ -28,13 +28,15 @@
 | 8.7|socket.io players in lobby toiminto + säätöä |4h|
 | 10.7  | socket io yatzy tablen alustus siten että se muokkautuu privateyatzyroomissa olevien mukaan|6,5h|
 |11.7 |yatzytablen alustus jatkot, pisteiden päivitys kaikille socketeille pelissä, noppien pyörimisen näkyminen kaikille suunnittelu|6h|
-
-
-
-
-
+|12.7 | noppien säätö |4h|
+|13.7|noppien säätö |3.5h|
+|14.7 |noppien säätö  |4h|
+|15.7|väliluovutus noppiin... pisteiden laskun/ vuoron yms. päivittyminen kaikille pelaajille  |4h|
+|16.7 | tyylien hiominen |4,5h|
 | |  ||
 | |  ||
 | |  ||
 | |  ||
-| yht   | 139,5 h   | | 
+| yht   | 159,5 h   | | 
+
+
