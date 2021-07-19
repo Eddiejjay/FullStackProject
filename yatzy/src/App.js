@@ -9,12 +9,15 @@ import { useDispatch, useSelector } from 'react-redux'
 // import { initializePoints }  from './reducers/pointsReducer'
 import { initializePlayers }  from './reducers/playerReducer'
 import Dices from './components/Dices'
+// import Dices2 from './components/Dices2'
+
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Switch, Route, Link, useHistory
 } from 'react-router-dom'
+
 // import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
 import pointService from './services/pointService'
@@ -22,6 +25,8 @@ import { initializeTurn } from './reducers/turnReducer'
 import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
+import { storeUser } from './reducers/userReducer'
+import { Text, NavBar, NavBarText, StyledLink } from './components/StyledComponents'
 // import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
@@ -31,9 +36,8 @@ import YatzyChat from './components/YatzyChat'
 
 
 const App = () => {
-
+  const history = useHistory()
   const dispatch = useDispatch()
-  console.log(socket)
 
   //socket.on kuuntelee servulta tulevaa vastausta
   socket.on('online-user-back-to-all', username => {
@@ -50,8 +54,6 @@ const App = () => {
     console.log('sockets in yatzyroom client ', sockets)
   })
 
-
-
   const user = useSelector(state => state.user)
 
   const dice = useSelector(state => state.dice)
@@ -61,18 +63,14 @@ const App = () => {
   // useEffect(() => {
   //   dispatch(initializePlayers())
   //   dispatch(initializeTurn())
-  //   dispatch(initializePoints())
+  //   dispatch(initializePoints())elcome To YatzyRoom
   //   console.log('initplayers 1')
   // }, [dispatch])
-
-
-
 
   const deletePointsFromDb = () => {
     console.log('deleeteall clicked')
     pointService.deleteAll()
   }
-
 
   const Container = styled.div `
 
@@ -82,52 +80,11 @@ const App = () => {
   padding:10px;
 
   `
-  const NavBar = styled.nav`
-  display: flex;
-  flex-direction: row;
-  background: rgba(7,7,7, 0.1);
-  justify-content: space-around;
-  height : 45px;
- 
-  `
-  const StyledLink = styled.div `
-    font-family: "Lucida Console", Monaco, monospace;
-  font-size: 27px;
-  letter-spacing: 0px;
-  word-spacing: 0px;
-  color: #000000;
-  font-weight: 700;
-  text-decoration: none;
-  font-style: normal;
-  font-variant: normal;
-  text-transform: none;
-  padding: 10px;
-   textDecoration: 'none';
-   &:hover {
-    background: rgb(255,240,219,0.5)
-    
-  }
 
-    `
   // const StyledImg = styled.img`
   // width: 200px;
   // height:200px
   // `
-
-  const Text = styled.div `
-  padding: 0px;
-  color:white;
-  font-family: "Comic Sans MS", cursive, sans-serif;
- font-size: 25px;
- letter-spacing: 2px;
- word-spacing: 2px;
- font-weight: 700;
- text-decoration: none solid rgb(68, 68, 68);
- font-style: italic;
- font-variant: small-caps;
- text-transform: capitalize;`
-
-
 
 
   const startGameClicked = () => {
@@ -142,21 +99,28 @@ const App = () => {
     dispatch(initializePoints(players))
   })
 
+  const logOutClicked = async  () => {
+    await dispatch(storeUser(null))
+    history.push('/home')
+    console.log('perse logged out')
+
+  }
+
   return (
 
     <Router>
 
       <NavBar>
 
-        <StyledLink>  <Link style={{ textDecoration: 'none' }} to="/"><Text>Home</Text></Link></StyledLink>
-
+        <StyledLink>  <Link style={{ textDecoration: 'none' }} to="/"><NavBarText>Home</NavBarText></Link></StyledLink>
         {user && <Text>{user.username} logged in</Text>}
         {/* <Link  to="/">home</Link>, */}
         {/* <Link  to="/yatzy">yatzy</Link>, */}
         {/* <StyledLink><Link  to="/yatzyroom"><Text>Yatzyroom</Text></Link></StyledLink> */}
-        {user && <StyledLink><Link style={{ textDecoration: 'none' }}  to="/yatzyroom"><Text>Yatzyroom</Text></Link></StyledLink>}
-        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }}to="/login"><Text>Login</Text></Link></StyledLink>}
-        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }} to="/create"><Text>Create user</Text></Link></StyledLink>}
+        {user && <StyledLink><Link style={{ textDecoration: 'none' }}  to="/yatzyroom"><NavBarText>Yatzyroom</NavBarText></Link></StyledLink>}
+        {user && <StyledLink><Link onClick = {logOutClicked} style={{ textDecoration: 'none' }}  to="/"><NavBarText>Log out</NavBarText></Link></StyledLink>}
+        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }}to="/login"><NavBarText>Login</NavBarText></Link></StyledLink>}
+        {user === null && <StyledLink><Link style={{ textDecoration: 'none' }} to="/create"><NavBarText>Create user</NavBarText></Link></StyledLink>}
         {/* <StyledImg src={logo} alt="Logo" /> */}
 
       </NavBar>

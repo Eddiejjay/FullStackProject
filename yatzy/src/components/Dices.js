@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { useSelector } from 'react-redux'
 
 
 import Dice from 'react-dice-roll'
 import styled from 'styled-components'
 import { socket } from '../services/socketService'
-import { setDice } from '../reducers/diceReducer'
+// import { setDice } from '../reducers/diceReducer'
 
 
 const Dices = () => {
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   // const [trueFalse,setTrueFalse] = useState(true)
+  const diceRef = useRef()
+  const diceRef1 = useRef()
+  const diceRef2 = useRef()
+  const diceRef3 = useRef()
+  const diceRef4 = useRef()
+  const diceRef5 = useRef()
 
-
+  const turn = useSelector(state => state.turn.player)
+  const user = useSelector(state => state.user.username)
 
 
   const StyledDices = styled.div`
@@ -23,11 +30,11 @@ const Dices = () => {
   justify-content: center;
   gap: 3%;
 `
-  const rollDice = () => {
-    const press =  new KeyboardEvent('keypress',{ 'key':'Enter' })
-    dispatchEvent(press)
-    console.log('press',press)
-  }
+  // const rollDice = () => {
+  //   const press =  new KeyboardEvent('keypress',{ 'key':'Enter' })
+  //   dispatchEvent(press)
+  //   console.log('press',press)
+  // }
   // const toggle = () => {
   //   setTrueFalse(!trueFalse)
   // }
@@ -37,21 +44,21 @@ const Dices = () => {
   },[])
 
 
-  let dice = useSelector(state => state.dice)
+  // let dice = useSelector(state => state.dice)
 
 
   const diceValueToServer = (value) => {
-    if(dice === null) {
-      console.log('dice on ennen ehdollista renderöointiä', dice )
+    if (turn === user) {
       socket.emit('dice-value', value)
       console.log('diceval to server ', value)
-    }
-
-  }
+    }}
 
   socket.on('dice-value-back-form-server',(value) => {
     console.log('dice value back from server  CLIENT', value)
-    dispatch(setDice(value))
+    // dispatch(setDice(value))
+    diceRef.current.rollDice(value)
+    diceRef.current.value= 1
+    console.log(diceRef)
   })
 
   // const diceElement = (dice) => {
@@ -75,15 +82,14 @@ const Dices = () => {
 
   return (
     <StyledDices>
-      <Dice triggers= {['Enter','click', rollDice()]} onRoll={(value) => diceValueToServer(value)} cheatValue={dice}/>
+      <Dice ref ={diceRef} onRoll={(value) => diceValueToServer(value)}/>
 
-      <h1>{dice} </h1>
-      <Dice size={100}></Dice>
-      <Dice cheatValue = {0} size={100}></Dice>
-      <Dice size={100}></Dice>
-      <Dice size={100}></Dice>
-      <Dice size={100}></Dice>
-      <button onClick = {rollDice}>Roll dice</button>
+      <Dice ref ={diceRef1} size={100} onRoll={(value) => diceValueToServer(value)}></Dice>
+      <Dice ref ={diceRef2} size={100} onRoll={(value) => diceValueToServer(value)}></Dice>
+      <Dice ref ={diceRef3} size={100} onRoll={(value) => diceValueToServer(value)}></Dice>
+      <Dice ref ={diceRef4} size={100} onRoll={(value) => diceValueToServer(value)}></Dice>
+      <Dice ref ={diceRef5} size={100} onRoll={(value) => diceValueToServer(value)}></Dice>
+      {/* <button onClick = {rollDice}>Roll dice</button> */}
     </StyledDices>
   )
 }

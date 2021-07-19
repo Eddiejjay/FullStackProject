@@ -14,6 +14,22 @@ export const Text = styled.div `
  font-variant: small-caps;
  text-transform: capitalize;`
 
+export const NavBarText = styled.div `
+padding: 0px;
+color:white;
+font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: 2px;
+word-spacing: 2px;
+
+font-weight: 700;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: italic;
+font-variant: small-caps;
+text-transform: capitalize;`
+
+
+
 export const StyledButton = styled.button `
 margin: 10px;
 padding:0x;
@@ -53,4 +69,30 @@ box-shadow: 0px 0px 5px rgba(66,66,66,.75);
     
   }
    
+`
+export const StyledLink = styled.div `
+font-family: "Lucida Console", Monaco, monospace;
+font-size: 27px;
+letter-spacing: 0px;
+word-spacing: 0px;
+color: #000000;
+font-weight: 700;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+padding: 10px;
+textDecoration: 'none';
+&:hover {
+background: rgb(255,240,219,0.5)
+}
+
+`
+export const NavBar = styled.nav`
+display: flex;
+flex-direction: row;
+background: rgba(7,7,7, 0.1);
+justify-content: space-around;
+height : 45px;
+
 `

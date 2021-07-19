@@ -2,50 +2,10 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import userService from '../services/userService'
 import styled from 'styled-components'
+import { StyledInput, Text, StyledButton } from './StyledComponents'
 
-// import { InitializeUser } from '../reducers/userReducer'
-const UserInput = styled.input `
-
-padding:6px;
-font-size: 25px;
-border-width: 0px;
-box-shadow: 0px 0px 5px rgba(66,66,66,.75);
-text-shadow: 0px 0px 5px rgba(66,66,66,.75);
-   background: transparent;
-   border: 5px groove rgba(20,20,20,0.17);
-   &:hover {
-    background: rgb(250, 249, 249,0.4)
-    
-  }
-   
-`
 const CreateUserCointainer = styled.div`
 padding:100px;
-
-`
-const Text = styled.div `
-  padding: 12px;
-  color:white;
-  font-family: "Comic Sans MS", cursive, sans-serif;
- font-size: 25px;
- letter-spacing: 2px;
- word-spacing: 2px;
- 
- font-weight: 700;
- text-decoration: none solid rgb(68, 68, 68);
- font-style: italic;
- font-variant: small-caps;
- text-transform: capitalize;`
-
-const StyledButton = styled.button `
-margin: 10px;
-padding:0x;
-background: transparent;
-border: 5px groove rgba(20,20,20,0.17);
-&:hover {
-  background: rgb(250, 249, 249,0.4)
-  
-}
 
 `
 
@@ -66,10 +26,6 @@ const CreateUser = () => {
     console.log(newUser)
     await userService.createUser(newUser)
     history.push('/')
-
-
-
-
   }
 
   return (
@@ -79,7 +35,7 @@ const CreateUser = () => {
       <form onSubmit = {loginHandler}>
         <div>
           <Text>Username</Text>
-          <UserInput
+          <StyledInput
             id = 'username'
             type= "text"
             valupdateue = {username}
@@ -89,7 +45,7 @@ const CreateUser = () => {
         </div>
         <div>
           <Text>Password</Text>
-          <UserInput
+          <StyledInput
             id = 'password'
             type= "text"
             value = {password}

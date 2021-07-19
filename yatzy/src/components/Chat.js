@@ -9,6 +9,7 @@ const ChatBox = styled.div `
 border: 10px groove rgba(20,20,20,0.17);
 
 box-sizing: content-box;
+margin: 75px;
 width: 1200px;
 height: 400px;
 padding: 5px;
