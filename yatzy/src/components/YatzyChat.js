@@ -1,50 +1,21 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { StyledButton } from './StyledComponents'
+import { StyledButton, Text, StyledInput, ChatBox, StyledMessage, MessageContainer  } from './StyledComponents'
 import { socket } from '../services/socketService'
 import { useSelector } from 'react-redux'
 
-const ChatBox = styled.div `
-border: 5px groove rgba(20,20,20,0.17);
-border-radius: 40px 40px 40px 40px;
-box-sizing: content-box;
-width: 500px;
-height: 600px;
-padding: 5px;
-display:flex;
-flex-direction: column;
-justify-content: flex-end;
-`
 
 const Container = styled.div `
 
+width: 1000px;
 display:flex;
 flex-direction: row;
-justify-content: flex-start;
+justify-content: center;
 padding:10px;
 
 `
 
 
-
-const StyledInput = styled.input`
-width : 900x;   
-        border-style: double;
-        background: transparent;
-        border: 3px groove rgba(164,164,164,0.17);
-        &:hover {
-          background: #fff0db;
-          
-        }
-
-        `
-const StyledMessage = styled.div`
-width: 900px;
-color: #fff0db;
-justify-content: left;
-text-align: left;
-
-`
 // const StyledButton = styled.button `
 
 // `
@@ -73,17 +44,23 @@ const YatzyChat = () => {
 
 
   })
+  const updateScroll = () => {
+    var element = document.getElementById('yatzychat123')
+    console.log('elemetn ====' , element )
+    element.scrollTop = element.scrollHeight
+  }
+
   // const enterPressed = (event) => {
 
   //   if (event.keyCode !== 'Enter') {
   //     sendButtonClicked()
   //   }
   // }
-
   const sendButtonClicked = () => {
     socket.emit('private-chat-message',privateRoom, message ,username)
     console.log('privateroom sendclkicdeistä',privateRoom)
     setChatList([...chatList1,`${username}: ${message}`])
+    updateScroll()
     setMessage('')
 
   }
@@ -98,13 +75,15 @@ const YatzyChat = () => {
 
   return (
     <Container>
-      <ChatBox>
-        {chatList1.map(item => <StyledMessage key = {item}>{item}</StyledMessage>)}
+      <ChatBox id = 'yatzychat123'>
+        <MessageContainer>
+          {chatList1.map(item => <StyledMessage key = {`${item}${Math.random()}`} >{item}</StyledMessage>)}
+        </MessageContainer>
         <StyledInput  onChange = {(event) => setMessage(event.target.value)}
           id = 'message'
           type= "text"
           value = {message}
-          name = "MessageInput"></StyledInput><StyledButton onClick = {sendButtonClicked}>Send</StyledButton>
+          name = "MessageInput"></StyledInput><StyledButton onClick = {sendButtonClicked}><Text>Send</Text></StyledButton>
 
       </ChatBox>
     </Container>

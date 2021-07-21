@@ -8,27 +8,42 @@ import { StyledInput, StyledButton, Text } from './StyledComponents'
 import { useSelector } from 'react-redux'
 
 const JoinPrivateYatzyRoom = () => {
-  const [inputValue, setInputValue] = useState('')
+  const [createInputValue, setCreateInputValue] = useState('')
+  const [joinInputValue, setJoinInputValue] = useState('')
   const history = useHistory()
 
   const user = useSelector (state => state.user.username)
 
-  const createPrivateYatzyRoom = () => {
-    socket.emit('joinPrivateYatzyRoom' ,inputValue)
+  const joinPrivateYatzyRoom = () => {
+    socket.emit('joinPrivateYatzyRoom' ,joinInputValue)
     addUserInPrivateYatzyRoom(user)
     history.push('/yatzy')
 
 
   }
 
+  const createPrivateYatzyRoom = () => {
+    socket.emit('joinPrivateYatzyRoom' ,createInputValue)
+    setCreateInputValue('')
+    socket.emit('new-private-yatzyroom', user,createInputValue)
+
+  }
+
   return (
     <div>
       <Text>Create private YatzyRoom</Text>
-      <StyledInput  onChange = {(event) => setInputValue(event.target.value)}
-        id = 'inputValue'
+      <StyledInput  onChange = {(event) => setCreateInputValue(event.target.value)}
+        id = 'createInputValue'
         type= "text"
-        value = {inputValue}
-        name = "RoomInput"></StyledInput><StyledButton onClick = {createPrivateYatzyRoom}>Send</StyledButton>
+        value = {createInputValue}
+        name = "CreateRoomInput"></StyledInput>
+      <StyledButton onClick = {createPrivateYatzyRoom}><Text>Create</Text></StyledButton>
+      <StyledInput  onChange = {(event) => setJoinInputValue(event.target.value)}
+        id = 'JoinInputValue'
+        type= "text"
+        value = {joinInputValue}
+        name = "JoinRoomInput"></StyledInput>
+      <StyledButton onClick = {joinPrivateYatzyRoom}><Text>Join</Text></StyledButton>
 
     </div>
   )}

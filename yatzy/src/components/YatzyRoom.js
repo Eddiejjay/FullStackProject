@@ -1,10 +1,10 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import Chat from './Chat'
 import JoinPrivateYatzyRoom from './JoinPrivateYatzyRoom'
 import styled from 'styled-components'
-import { StyledButton } from './StyledComponents'
-import { Text } from './StyledComponents'
+// import { StyledButton } from './StyledComponents'
+// import { Text } from './StyledComponents'
 
 const Container = styled.div `
 
@@ -29,19 +29,19 @@ export const HeadingText = styled.div `
  text-transform: capitalize;`
 
 const YatzyRoom = () => {
-  const history = useHistory()
-  const playYatzyClicked = () => {
+  // const history = useHistory()
+  // const playYatzyClicked = () => {
 
-    history.push('/yatzy')
+  //   history.push('/yatzy')
 
-  }
+  // }
 
   return (
     <Container>
       <HeadingText> Welcome to YatzyRoom</HeadingText>
       <Chat></Chat>
       <JoinPrivateYatzyRoom></JoinPrivateYatzyRoom>
-      <StyledButton onClick ={playYatzyClicked}><Text>Play YatzyHatsiMatsi</Text></StyledButton>
+      {/* <StyledButton onClick ={playYatzyClicked}><Text>Play YatzyHazyMazy</Text></StyledButton> */}
     </Container>
   )
 }

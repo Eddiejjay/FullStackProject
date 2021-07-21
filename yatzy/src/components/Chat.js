@@ -1,23 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { StyledButton, Text } from './StyledComponents'
+import { StyledButton, Text, StyledInput, ChatBox, StyledMessage, MessageContainer } from './StyledComponents'
 import { socket } from '../services/socketService'
 import { useSelector } from 'react-redux'
-import { StyledInput } from './StyledComponents'
 
-const ChatBox = styled.div `
-border: 10px groove rgba(20,20,20,0.17);
 
-box-sizing: content-box;
-margin: 75px;
-width: 1200px;
-height: 400px;
-padding: 5px;
-display:flex;
-flex-direction: column;
-justify-content: flex-end;
-overflow: auto;
-`
 
 const Container = styled.div `
 
@@ -39,18 +26,6 @@ padding:10px;
 // flex-direction: column;
 // justify-content: flex-start;
 // `
-const StyledMessage = styled.div`
-width: 900px;
-color:black;
-font-size: 25px;
-justify-content: left;
-text-align: left;
-
-
-`
-const MessageContainer = styled.div`
-overflow-y: scroll
-`
 
 
 const Chat = () => {
@@ -67,10 +42,14 @@ const Chat = () => {
   })
 
   socket.on('joined-username-back-from-server', username => {
-    setChatList([...chatList, `${username} joind YatzyRooms`])
+    setChatList([...chatList, `${username} joined YatzyRoom`])
     setUsersInLobby([...usersInLobby, username])
   })
-
+  socket.on('new-private-room-created',(pRoom, user) => {
+    setChatList([...chatList, `New Private Yatzyroom ${pRoom} created by ${user}`])
+    console.log('Created ', pRoom,user)
+    // setUsersInLobby([...usersInLobby, username])
+  })
   // const enterPressed = (event) => {
 
   //   if (event.keyCode !== 'Enter') {
@@ -97,7 +76,7 @@ const Chat = () => {
     <Container>
       <ChatBox>
         <MessageContainer>
-          {chatList.map(item => <StyledMessage key = {item}>{item}</StyledMessage>)}
+          {chatList.map(item => <StyledMessage  key = {`${item}${Math.random()}`}>{item}</StyledMessage>)}
         </MessageContainer>
         <StyledInput  style={{ margin: '20px' }} onChange = {(event) => setMessage(event.target.value)}
           id = 'message'

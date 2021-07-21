@@ -26,7 +26,7 @@ import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
 import { storeUser } from './reducers/userReducer'
-import { Text, NavBar, NavBarText, StyledLink } from './components/StyledComponents'
+import { Text, NavBar, NavBarText, StyledLink, StyledButton } from './components/StyledComponents'
 // import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
@@ -55,9 +55,8 @@ const App = () => {
   })
 
   const user = useSelector(state => state.user)
+  const points = useSelector(state => state.points)
 
-  const dice = useSelector(state => state.dice)
-  console.log('dice appista',dice)
   // const players = useSelector(state => state.players)
 
   // useEffect(() => {
@@ -73,11 +72,12 @@ const App = () => {
   }
 
   const Container = styled.div `
-
+  
   display:flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   padding:10px;
+  align-items: flex-start;
 
   `
 
@@ -106,6 +106,8 @@ const App = () => {
 
   }
 
+
+
   return (
 
     <Router>
@@ -133,9 +135,11 @@ const App = () => {
           <Container>
             <YatzyTable></YatzyTable>
             <YatzyChat></YatzyChat>
-            <button onClick = {startGameClicked}>Start Game</button>
           </Container>
           <button onClick = {deletePointsFromDb}>delete points from database</button>
+          {console.log('points', points)}
+          {points.length === 0 && <StyledButton onClick = {startGameClicked}><Text>Start Game</Text></StyledButton>}
+          {points.length !== 0 && <StyledButton><Text>End Game</Text></StyledButton>}
 
         </Route>
         <Route path="/yatzyroom">

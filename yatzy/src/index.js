@@ -19,7 +19,7 @@ import diceReducer from './reducers/diceReducer'
 
 
 const Container = styled.div`
-height:1400px;
+height:2000px;
 flex-direction: column;
 align-items: center;
 text-align: center;

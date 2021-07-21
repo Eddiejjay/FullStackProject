@@ -96,3 +96,27 @@ justify-content: space-around;
 height : 45px;
 
 `
+export const ChatBox = styled.div `
+border: 10px groove rgba(20,20,20,0.17);
+box-sizing: content-box;
+margin: 75px;
+width: 1200px;
+height: 400px;
+padding: 5px;
+display:flex;
+flex-direction: column;
+justify-content: flex-end;
+overflow: auto;
+`
+
+export const StyledMessage = styled.div`
+width: 900px;
+color:black;
+font-size: 25px;
+justify-content: left;
+text-align: left;
+
+`
+export const MessageContainer = styled.div`
+overflow-y: scroll
+`
