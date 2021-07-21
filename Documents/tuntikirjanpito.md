@@ -33,10 +33,10 @@
 |14.7 |noppien säätö  |4h|
 |15.7|väliluovutus noppiin... pisteiden laskun/ vuoron yms. päivittyminen kaikille pelaajille  |4h|
 |16.7 | tyylien hiominen |4,5h|
+|19.7 |nopista saavutettu erävoitto toimii kaikilla selaimilla |5h|
+|20.7 |tyylien säätöä, koodin siistimistä yms.  |4h|
+|21.7|noppien säätö, siten että kaikki nopat toimivat täydellisesti multiplayerissä, sovellus Herokuun  |6h|
 | |  ||
-| |  ||
-| |  ||
-| |  ||
-| yht   | 159,5 h   | | 
+| yht   | 174,5 h   | | 
 
 
