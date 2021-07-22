@@ -15,17 +15,18 @@ import Dices from './components/Dices'
 // import playerService from './services/playerService'
 import {
   BrowserRouter as Router,
-  Switch, Route, Link, useHistory
+  Switch, Route, Link
 } from 'react-router-dom'
 
 // import Home from './components/Home'
 import { initializePoints } from './reducers/pointsReducer'
-import pointService from './services/pointService'
+// import pointService from './services/pointService'
+import EndGameButton from './components/EndGameButton'
+import LogOutLink from './components/LogOutLink'
 import { initializeTurn } from './reducers/turnReducer'
 import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
-import { storeUser } from './reducers/userReducer'
 import { Text, NavBar, NavBarText, StyledLink, StyledButton } from './components/StyledComponents'
 // import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
@@ -36,7 +37,7 @@ import { Text, NavBar, NavBarText, StyledLink, StyledButton } from './components
 
 
 const App = () => {
-  const history = useHistory()
+
   const dispatch = useDispatch()
 
   //socket.on kuuntelee servulta tulevaa vastausta
@@ -54,6 +55,8 @@ const App = () => {
     console.log('sockets in yatzyroom client ', sockets)
   })
 
+
+
   const user = useSelector(state => state.user)
   const points = useSelector(state => state.points)
 
@@ -66,10 +69,6 @@ const App = () => {
   //   console.log('initplayers 1')
   // }, [dispatch])
 
-  const deletePointsFromDb = () => {
-    console.log('deleeteall clicked')
-    pointService.deleteAll()
-  }
 
   const Container = styled.div `
   
@@ -92,20 +91,15 @@ const App = () => {
 
   }
 
+
+
+
   socket.on('players-in-private-yatzyroom', players => {
     console.log('players app.js clientista',players )
     dispatch(initializePlayers(players))
     dispatch(initializeTurn(players))
     dispatch(initializePoints(players))
   })
-
-  const logOutClicked = async  () => {
-    await dispatch(storeUser(null))
-    history.push('/home')
-    console.log('perse logged out')
-
-  }
-
 
 
   return (
@@ -120,7 +114,7 @@ const App = () => {
         {/* <Link  to="/yatzy">yatzy</Link>, */}
         {/* <StyledLink><Link  to="/yatzyroom"><Text>Yatzyroom</Text></Link></StyledLink> */}
         {user && <StyledLink><Link style={{ textDecoration: 'none' }}  to="/yatzyroom"><NavBarText>Yatzyroom</NavBarText></Link></StyledLink>}
-        {user && <StyledLink><Link onClick = {logOutClicked} style={{ textDecoration: 'none' }}  to="/"><NavBarText>Log out</NavBarText></Link></StyledLink>}
+        {user && <LogOutLink></LogOutLink>}
         {user === null && <StyledLink><Link style={{ textDecoration: 'none' }}to="/login"><NavBarText>Login</NavBarText></Link></StyledLink>}
         {user === null && <StyledLink><Link style={{ textDecoration: 'none' }} to="/create"><NavBarText>Create user</NavBarText></Link></StyledLink>}
         {/* <StyledImg src={logo} alt="Logo" /> */}
@@ -136,11 +130,10 @@ const App = () => {
             <YatzyTable></YatzyTable>
             <YatzyChat></YatzyChat>
           </Container>
-          <button onClick = {deletePointsFromDb}>delete points from database</button>
+          {/* <button onClick = {deletePointsFromDb}>delete points from database</button> */}
           {console.log('points', points)}
           {points.length === 0 && <StyledButton onClick = {startGameClicked}><Text>Start Game</Text></StyledButton>}
-          {points.length !== 0 && <StyledButton><Text>End Game</Text></StyledButton>}
-
+          {points.length !== 0 && <EndGameButton></EndGameButton>}
         </Route>
         <Route path="/yatzyroom">
           {/* <div>

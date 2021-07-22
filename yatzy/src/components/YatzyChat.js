@@ -24,22 +24,21 @@ const YatzyChat = () => {
   const username = useSelector(state => state.user.username )
   const [chatList1, setChatList] = useState([])
   const [message, setMessage] = useState('')
-  const [usersInLobby, setUsersInLobby] = useState([])
   const [privateRoom, setPrivateRoom] = useState('')
   // const [readyMessage, setReadyMessage] = useState('')
 
-  socket.on('chat-message-back-to-privatechat', message => {
+  socket.once('chat-message-back-to-privatechat', message => {
     console.log('chat-message-back-to-all-sockets', message)
     setChatList([...chatList1, message])
 
   })
-  socket.on('joined-username-back-from-server', username => {
-    setChatList([...chatList1, `${username} joind YatzyRooms`])
-    setUsersInLobby([...usersInLobby, username])
+  // socket.once('joined-username-back-from-server', username => {
+  //   setChatList([...chatList1, `${username} joind YatzyRooms`])
+  //   setUsersInLobby([...usersInLobby, username])
 
 
-  })
-  socket.on('private-room', privateRoom => {
+  // })
+  socket.once('private-room', privateRoom => {
     setPrivateRoom(privateRoom)
 
 

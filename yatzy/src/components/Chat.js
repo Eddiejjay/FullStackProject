@@ -35,17 +35,19 @@ const Chat = () => {
   const [usersInLobby, setUsersInLobby] = useState([])
   // const [readyMessage, setReadyMessage] = useState('')
 
-  socket.on('chat-message-back-to-all-sockets', message => {
+  socket.once('chat-message-back-to-all-sockets', message => {
     console.log('chat-message-back-to-all-sockets', message)
     setChatList([...chatList, message])
 
   })
 
-  socket.on('joined-username-back-from-server', username => {
+  socket.once('joined-username-back-from-server', username => {
     setChatList([...chatList, `${username} joined YatzyRoom`])
     setUsersInLobby([...usersInLobby, username])
   })
-  socket.on('new-private-room-created',(pRoom, user) => {
+
+
+  socket.once('new-private-room-created',(pRoom, user) => {
     setChatList([...chatList, `New Private Yatzyroom ${pRoom} created by ${user}`])
     console.log('Created ', pRoom,user)
     // setUsersInLobby([...usersInLobby, username])
@@ -57,10 +59,15 @@ const Chat = () => {
   //   }
   // }
 
+  const socketEmitChatMessage = (message, username) => {
+    socket.emit('chat-message',message ,username)
+  }
+
   const sendButtonClicked = () => {
-    socket.emit('chat-message', message ,username)
+    socketEmitChatMessage(message, username)
     setChatList([...chatList,`${username}: ${message}`])
     setMessage('')
+    console.log('chatlist on seuraava', chatList)
 
   }
 

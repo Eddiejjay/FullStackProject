@@ -31,7 +31,7 @@ const JoinPrivateYatzyRoom = () => {
 
   return (
     <div>
-      <Text>Create private YatzyRoom</Text>
+      <Text>Create or Join private YatzyRoom </Text>
       <StyledInput  onChange = {(event) => setCreateInputValue(event.target.value)}
         id = 'createInputValue'
         type= "text"
