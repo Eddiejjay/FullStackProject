@@ -36,7 +36,10 @@
 |19.7 |nopista saavutettu erävoitto toimii kaikilla selaimilla |5h|
 |20.7 |tyylien säätöä, koodin siistimistä yms.  |4h|
 |21.7|noppien säätö, siten että kaikki nopat toimivat täydellisesti multiplayerissä, sovellus Herokuun  |6h|
+|22.7 |bugien korjailua, tyylien hiomista|8,5h|
 | |  ||
-| yht   | 174,5 h   | | 
+| |  ||
+| |  ||
+| yht   | 183 h   | | 
 
 
