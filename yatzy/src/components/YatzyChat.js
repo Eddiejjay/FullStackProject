@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { StyledButton, Text, StyledInput, ChatBox, StyledMessage, MessageContainer  } from './StyledComponents'
 import { socket } from '../services/socketService'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setPrivateRoom } from '../reducers/privateRoomReducer'
+// import { setPrivateChat } from '../reducers/privateChatReducer'
 
 
 const Container = styled.div `
@@ -21,16 +23,28 @@ padding:10px;
 // `
 
 const YatzyChat = () => {
+  const dispatch = useDispatch()
   const username = useSelector(state => state.user.username )
+  // const allPoints = useSelector(state => state.points)
   const [chatList1, setChatList] = useState([])
   const [message, setMessage] = useState('')
-  const [privateRoom, setPrivateRoom] = useState('')
+  // const [privateRoom, setPrivateRoom] = useState('')
+  const privateRoom = useSelector(state => state.privateRoom)
+  // const chatLog = useSelector (state => state.chatLog)
   // const [readyMessage, setReadyMessage] = useState('')
+
+
+
+  // useEffect(() => {
+  //   setChatList(chatLog)
+  // },[allPoints])
+
 
   socket.once('chat-message-back-to-privatechat', message => {
     console.log('chat-message-back-to-all-sockets', message)
     setChatList([...chatList1, message])
-
+    // dispatch(setPrivateChat(`${username}: ${message}`))
+    socket.off('chat-message-back-to-privatechat')
   })
   // socket.once('joined-username-back-from-server', username => {
   //   setChatList([...chatList1, `${username} joind YatzyRooms`])
@@ -38,8 +52,8 @@ const YatzyChat = () => {
 
 
   // })
-  socket.once('private-room', privateRoom => {
-    setPrivateRoom(privateRoom)
+  socket.on('private-room', privateRoom => {
+    dispatch(setPrivateRoom(privateRoom))
 
 
   })
@@ -59,6 +73,8 @@ const YatzyChat = () => {
     socket.emit('private-chat-message',privateRoom, message ,username)
     console.log('privateroom sendclkicdeistä',privateRoom)
     setChatList([...chatList1,`${username}: ${message}`])
+    // dispatch(setPrivateChat(`${username}: ${message}`))
+    console.log('privateroom', privateRoom)
     updateScroll()
     setMessage('')
 

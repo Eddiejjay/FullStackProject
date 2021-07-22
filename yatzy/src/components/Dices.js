@@ -36,6 +36,7 @@ const Dices = () => {
   const StyledDices = styled.div`
   height:200px;
   display:flex;
+  padding: 10px;
   align-content: stretch;
   justify-content: center;
   gap: 3%;

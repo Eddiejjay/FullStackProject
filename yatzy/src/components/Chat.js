@@ -33,11 +33,13 @@ const Chat = () => {
   const [chatList, setChatList] = useState([])
   const [message, setMessage] = useState('')
   const [usersInLobby, setUsersInLobby] = useState([])
+
   // const [readyMessage, setReadyMessage] = useState('')
 
   socket.once('chat-message-back-to-all-sockets', message => {
     console.log('chat-message-back-to-all-sockets', message)
     setChatList([...chatList, message])
+    // socket.off('chat-message-back-to-all-sockets')
 
   })
 
@@ -59,12 +61,12 @@ const Chat = () => {
   //   }
   // }
 
-  const socketEmitChatMessage = (message, username) => {
-    socket.emit('chat-message',message ,username)
-  }
+
+
+
 
   const sendButtonClicked = () => {
-    socketEmitChatMessage(message, username)
+    socket.emit('chat-message',message ,username)
     setChatList([...chatList,`${username}: ${message}`])
     setMessage('')
     console.log('chatlist on seuraava', chatList)

@@ -14,6 +14,8 @@ import thunk from 'redux-thunk'
 // import logo from './images/yazyhazymazylogo.png'
 import backgroundMountain from './images/background-mountain.jpg'
 import diceReducer from './reducers/diceReducer'
+import privateRoomReducer from './reducers/privateRoomReducer'
+import privateChatReducer from './reducers/privateChatReducer'
 // import backGroundHome from './images/background-home.jpg'
 
 
@@ -36,7 +38,9 @@ const reducer = combineReducers({
   turn : turnReducer,
   user : userReducer,
   onlineUsers : onlineUsersReducer,
-  dice : diceReducer
+  dice : diceReducer,
+  privateRoom: privateRoomReducer,
+  chatLog : privateChatReducer
 })
 
 const store = createStore(reducer,

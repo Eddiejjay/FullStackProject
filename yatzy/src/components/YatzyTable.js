@@ -7,6 +7,7 @@ import { nextTurn } from '../reducers/turnReducer'
 // import logo from '../images/yazyhazymazylogo.png'
 import { StyledButton, ButtonText } from './StyledComponents'
 import { socket } from '../services/socketService'
+import { Text } from './StyledComponents'
 
 const StyledTable = styled.table `
 
@@ -106,7 +107,8 @@ const YatzyTable = () => {
 
   // const playersFromStore = useSelector(state => state)
 
-  socket.on('turns-stats',(player, combination, points) => {
+  socket.once('turns-stats',(player, combination, points) => {
+    console.log('turns stats')
     dispatch(addTurnsPoints(player, combination, Number(points)))
     dispatch(nextTurn(players, turn.turn, turn.maxTurns))
   })
@@ -117,6 +119,12 @@ const YatzyTable = () => {
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
 
   })
+  socket.on('allPoints',(allPoints) => {
+    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
+
+  })
+
+
 
 
   const inputChange = (event) => {
@@ -157,6 +165,7 @@ const YatzyTable = () => {
 
   const allPointsOnClick = () => {
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
+    socket.emit('allPoints-calculation', allPoints)
   }
 
   const calculateAllpoints = (points) => {
@@ -269,7 +278,7 @@ const YatzyTable = () => {
         </tbody>
       </StyledTable>
 
-      <StyledButton onClick ={readyClicked}><ButtonText>Ready</ButtonText></StyledButton>
+      <StyledButton onClick ={readyClicked}><Text>Ready</Text></StyledButton>
 
     </div>
 

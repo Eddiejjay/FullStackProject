@@ -3,6 +3,7 @@ import React from 'react'
 import Chat from './Chat'
 import JoinPrivateYatzyRoom from './JoinPrivateYatzyRoom'
 import styled from 'styled-components'
+import { HeadingText } from './StyledComponents'
 // import { StyledButton } from './StyledComponents'
 // import { Text } from './StyledComponents'
 
@@ -14,20 +15,6 @@ justify-content: flex-start;
 padding:10px;
 
 `
-export const HeadingText = styled.div `
-  padding: 12px;
-  color:white;
-  font-family: "Comic Sans MS", cursive, sans-serif;
- font-size: 40px;
- letter-spacing: 2px;
- word-spacing: 2px;
- 
- font-weight: 700;
- text-decoration: none solid rgb(68, 68, 68);
- font-style: italic;
- font-variant: small-caps;
- text-transform: capitalize;`
-
 const YatzyRoom = () => {
   // const history = useHistory()
   // const playYatzyClicked = () => {

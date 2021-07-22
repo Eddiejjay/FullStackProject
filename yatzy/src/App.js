@@ -27,7 +27,7 @@ import { initializeTurn } from './reducers/turnReducer'
 import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
-import { Text, NavBar, NavBarText, StyledLink, StyledButton } from './components/StyledComponents'
+import { Text, NavBar, NavBarText, StyledLink, StyledButton, HeadingText } from './components/StyledComponents'
 // import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
@@ -59,11 +59,12 @@ const App = () => {
 
   const user = useSelector(state => state.user)
   const points = useSelector(state => state.points)
+  const turn = useSelector(state => state.turn.player)
 
   // const players = useSelector(state => state.players)
 
-  // useEffect(() => {
-  //   dispatch(initializePlayers())
+  // useEffect(() =>
+  //   dispatch(initializePlayers())yat
   //   dispatch(initializeTurn())
   //   dispatch(initializePoints())elcome To YatzyRoom
   //   console.log('initplayers 1')
@@ -124,10 +125,11 @@ const App = () => {
       <Switch>
         <Route path="/yatzy">
 
-          <h1>Yatzy</h1>
-          <Dices></Dices>
+          <HeadingText>Private YatzyHazyMazy</HeadingText>
+          {points.length !== 0 && <Dices></Dices> }
           <Container>
-            <YatzyTable></YatzyTable>
+            {points.length !== 0 && <YatzyTable></YatzyTable> }
+            {points.length !== 0 && <Text>{turn}  turn</Text> }
             <YatzyChat></YatzyChat>
           </Container>
           {/* <button onClick = {deletePointsFromDb}>delete points from database</button> */}

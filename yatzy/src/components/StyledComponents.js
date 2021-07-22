@@ -120,3 +120,17 @@ text-align: left;
 export const MessageContainer = styled.div`
 overflow-y: scroll
 `
+
+export const HeadingText = styled.div `
+  padding: 12px;
+  color:white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+ font-size: 40px;
+ letter-spacing: 2px;
+ word-spacing: 2px;
+ 
+ font-weight: 700;
+ text-decoration: none solid rgb(68, 68, 68);
+ font-style: italic;
+ font-variant: small-caps;
+ text-transform: capitalize;`
