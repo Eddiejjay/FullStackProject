@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux'
 
 import Dice from 'react-dice-roll'
 import styled from 'styled-components'
-import { socket } from '../services/socketService'
 // import { setDice } from '../reducers/diceReducer'
 
 
 const Dices = () => {
+  const socket = useSelector(state => state.socket)
 
   // const dispatch = useDispatch()
   // const [trueFalse,setTrueFalse] = useState(true)
@@ -49,10 +49,17 @@ const Dices = () => {
   // const toggle = () => {
   //   setTrueFalse(!trueFalse)
   // }
+  const jorma = ''
 
   useEffect(() => {
-    // toggle()
-  },[])
+    socket.on('dice-value-back-form-server',(value, diceNro) => {
+      console.log('dice value back from server  CLIENT', value)
+      // dispatch(setDice(value))
+      // diceRef.current.addEventListener('click', diceClick)
+      diceRefMap[diceNro].current.rollDice(value)
+      console.log('dicerefmapista',diceRefMap[diceNro])
+    })
+  },[jorma])
 
 
   // let dice = useSelector(state => state.dice)
@@ -65,13 +72,13 @@ const Dices = () => {
       console.log('diceval to server ', value, diceNro)
     }}
 
-  socket.on('dice-value-back-form-server',(value, diceNro) => {
-    console.log('dice value back from server  CLIENT', value)
-    // dispatch(setDice(value))
-    // diceRef.current.addEventListener('click', diceClick)
-    diceRefMap[diceNro].current.rollDice(value)
-    console.log('dicerefmapista',diceRefMap[diceNro])
-  })
+  // socket.on('dice-value-back-form-server',(value, diceNro) => {
+  //   console.log('dice value back from server  CLIENT', value)
+  //   // dispatch(setDice(value))
+  //   // diceRef.current.addEventListener('click', diceClick)
+  //   diceRefMap[diceNro].current.rollDice(value)
+  //   console.log('dicerefmapista',diceRefMap[diceNro])
+  // })
 
   // const diceClick = (event) => {
   //   console.log('eventtiä ja targettia', event.target)

@@ -1,16 +1,25 @@
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
+// import  { useEffect } from 'react'
 
-
-export const socket = io('http://localhost:3003')
-
-export const addOnlineUserSocket = (username) => {
+export const addOnlineUserSocket = (socket, username) => {
   socket.emit('add-online-user', username)
   console.log('socketsrvicestaä added ', username)
 }
 
-export const addUserInPrivateYatzyRoom = (username) => {
+export const addUserInPrivateYatzyRoom = (socket, username) => {
   socket.emit('add-private-room-user', username)
   console.log('private-user added ', username)
 }
 
-export default { addOnlineUserSocket, addUserInPrivateYatzyRoom }
+
+// export  let socket
+// export const SocketService = () => {
+//   const endPoint = 'http://localhost:3003'
+
+//   useEffect(() => {
+//     socket = io(endPoint)
+//   }, [endPoint])
+
+// }
+
+// export const socket = io('http://localhost:3003')

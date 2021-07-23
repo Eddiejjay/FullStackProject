@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { io } from 'socket.io-client'
 import styled from 'styled-components'
 import YatzyTable from './components/YatzyTable'
 import Login from './components/Login'
@@ -24,36 +25,63 @@ import { initializePoints } from './reducers/pointsReducer'
 import EndGameButton from './components/EndGameButton'
 import LogOutLink from './components/LogOutLink'
 import { initializeTurn } from './reducers/turnReducer'
-import { socket } from './services/socketService'
 import { addOnlineUser } from './reducers/onlineUsersReducer'
 import YatzyChat from './components/YatzyChat'
 import { Text, NavBar, NavBarText, StyledLink, StyledButton, HeadingText } from './components/StyledComponents'
+import { setSocket } from './reducers/socketReducer'
 // import setDice from './reducers/diceReducer'
 // import { addOnlineUserSocket } from  './services/socketService'
 // import logo from './images/yazyhazymazylogo.png'
 // import pointService from './services/pointService'
 // import playerService from './services/playerService'
 
+// const endPoint = 'http://localhost:3003'
 
 
 const App = () => {
 
   const dispatch = useDispatch()
+  const endPoint = 'http://localhost:3003'
+
+  useEffect(async () => {
+    let socket = io(endPoint)
+    await dispatch(setSocket(socket))
+    console.log('socket reducerista on', socket)
+
+    socket.on('online-user-back-to-all', username => {
+      // console.log('socet.data.usrname', socket.data.username)
+      console.log('username clientside vastaan otto takaisin servulta')
+      dispatch(addOnlineUser(username))
+    })
+
+    socket.on('delete-user-from-players-in-lobby',(socketId) => {
+      console.log('userDELETED FROM lobbylist iwth id ', socketId)
+    })
+
+    socket.on('sockets-yatzy-room',(sockets) => {
+      console.log('sockets in yatzyroom client ', sockets)
+    })
+
+    socket.on('players-in-private-yatzyroom', players => {
+      console.log('players app.js clientista',players )
+      dispatch(initializePlayers(players))
+      dispatch(initializeTurn(players))
+      dispatch(initializePoints(players))
+    })
+
+  },[endPoint])
+
+  let socket =  useSelector(state => state.socket)
+  console.log('socket reducerista', socket)
+  // // const endpoinstate.socket)t = 'http://localhost:3003'
+  // useEffect(() => {
+  //   // let socket = io(endpoint)
+  //   // dispatch(setSocket(socket))
+  //   console.log('socket on!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', socket)
+  // },[] )
+
 
   //socket.on kuuntelee servulta tulevaa vastausta
-  socket.on('online-user-back-to-all', username => {
-    // console.log('socet.data.usrname', socket.data.username)
-    console.log('username clientside vastaan otto takaisin servulta')
-    dispatch(addOnlineUser(username))
-  })
-
-  socket.on('delete-user-from-players-in-lobby',(socketId) => {
-    console.log('userDELETED FROM lobbylist iwth id ', socketId)
-  })
-
-  socket.on('sockets-yatzy-room',(sockets) => {
-    console.log('sockets in yatzyroom client ', sockets)
-  })
 
 
 
@@ -95,14 +123,6 @@ const App = () => {
 
 
 
-  socket.on('players-in-private-yatzyroom', players => {
-    console.log('players app.js clientista',players )
-    dispatch(initializePlayers(players))
-    dispatch(initializeTurn(players))
-    dispatch(initializePoints(players))
-  })
-
-
   return (
 
     <Router>
@@ -129,7 +149,7 @@ const App = () => {
           {points.length !== 0 && <Dices></Dices> }
           <Container>
             {points.length !== 0 && <YatzyTable></YatzyTable> }
-            {points.length !== 0 && <Text>{turn}  turn</Text> }
+            {points.length !== 0 && <Text>{turn}n  turn</Text> }
             <YatzyChat></YatzyChat>
           </Container>
           {/* <button onClick = {deletePointsFromDb}>delete points from database</button> */}

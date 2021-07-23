@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
@@ -6,7 +6,6 @@ import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
 // import logo from '../images/yazyhazymazylogo.png'
 import { StyledButton, ButtonText } from './StyledComponents'
-import { socket } from '../services/socketService'
 import { Text } from './StyledComponents'
 
 const StyledTable = styled.table `
@@ -103,26 +102,35 @@ const YatzyTable = () => {
 
   const players = useSelector(state => state.players)
   const turn = useSelector(state => state.turn)
+  const socket = useSelector(state => state.socket)
   console.log('turn',turn)
 
   // const playersFromStore = useSelector(state => state)
 
-  socket.once('turns-stats',(player, combination, points) => {
-    console.log('turns stats')
-    dispatch(addTurnsPoints(player, combination, Number(points)))
-    dispatch(nextTurn(players, turn.turn, turn.maxTurns))
-  })
 
-  socket.on('valisummaPoints',(allPoints) => {
-    console.log('valsummaallPoisnts', allPoints)
-    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
-    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+  const jorma = ''
 
-  })
-  socket.on('allPoints',(allPoints) => {
-    allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
+  useEffect(() => {
+    socket.on('turns-stats',(player, combination, points) => {
+      console.log('turns stats')
+      dispatch(addTurnsPoints(player, combination, Number(points)))
+      dispatch(nextTurn(players, turn.turn, turn.maxTurns))
+    })
 
-  })
+    socket.on('valisummaPoints',(allPoints) => {
+      console.log('valsummaallPoisnts', allPoints)
+      allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
+      allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
+
+    })
+    socket.on('allPoints',(allPoints) => {
+      allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
+
+    })
+
+
+  },[jorma])
+
 
 
 

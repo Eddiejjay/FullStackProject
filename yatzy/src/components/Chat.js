@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { StyledButton, Text, StyledInput, ChatBox, StyledMessage, MessageContainer } from './StyledComponents'
-import { socket } from '../services/socketService'
 import { useSelector } from 'react-redux'
 
 
@@ -33,27 +32,38 @@ const Chat = () => {
   const [chatList, setChatList] = useState([])
   const [message, setMessage] = useState('')
   const [usersInLobby, setUsersInLobby] = useState([])
+  const socket = useSelector(state => state.socket)
 
   // const [readyMessage, setReadyMessage] = useState('')
 
-  socket.once('chat-message-back-to-all-sockets', message => {
-    console.log('chat-message-back-to-all-sockets', message)
-    setChatList([...chatList, message])
-    // socket.off('chat-message-back-to-all-sockets')
+  const jorma = ''
 
-  })
+  useEffect(() => {
+    socket.on('chat-message-back-to-all-sockets', message => {
+      console.log('chat-message-back-to-all-sockets', message)
+      setChatList([...chatList, message])
+      // socket.off('chat-message-back-to-all-sockets')
 
-  socket.once('joined-username-back-from-server', username => {
-    setChatList([...chatList, `${username} joined YatzyRoom`])
-    setUsersInLobby([...usersInLobby, username])
-  })
+    })
+
+    socket.on('joined-username-back-from-server', username => {
+      setChatList([...chatList, `${username} joined YatzyRoom`])
+      setUsersInLobby([...usersInLobby, username])
+    })
 
 
-  socket.once('new-private-room-created',(pRoom, user) => {
-    setChatList([...chatList, `New Private Yatzyroom ${pRoom} created by ${user}`])
-    console.log('Created ', pRoom,user)
-    // setUsersInLobby([...usersInLobby, username])
-  })
+    socket.on('new-private-room-created',(pRoom, user) => {
+      setChatList([...chatList, `New Private Yatzyroom ${pRoom} created by ${user}`])
+      console.log('Created ', pRoom,user)
+      // setUsersInLobby([...usersInLobby, username])
+    })
+
+
+  },[jorma])
+
+
+
+
   // const enterPressed = (event) => {
 
   //   if (event.keyCode !== 'Enter') {

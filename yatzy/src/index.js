@@ -16,6 +16,7 @@ import backgroundMountain from './images/background-mountain.jpg'
 import diceReducer from './reducers/diceReducer'
 import privateRoomReducer from './reducers/privateRoomReducer'
 import privateChatReducer from './reducers/privateChatReducer'
+import socketReducer from './reducers/socketReducer'
 // import backGroundHome from './images/background-home.jpg'
 
 
@@ -40,7 +41,8 @@ const reducer = combineReducers({
   onlineUsers : onlineUsersReducer,
   dice : diceReducer,
   privateRoom: privateRoomReducer,
-  chatLog : privateChatReducer
+  chatLog : privateChatReducer,
+  socket : socketReducer
 })
 
 const store = createStore(reducer,

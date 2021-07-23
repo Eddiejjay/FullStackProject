@@ -3,7 +3,6 @@ import { StyledLink, NavBarText } from './StyledComponents'
 import { useHistory, Link } from 'react-router-dom'
 import { storeUser } from '../reducers/userReducer'
 import { useDispatch } from 'react-redux'
-import { socket } from '../services/socketService'
 import { useSelector } from 'react-redux'
 
 
@@ -12,6 +11,7 @@ const LogOutLink = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const player = useSelector(state => state.user.username)
+  const socket = useSelector(state => state.socket)
 
   const logOutClicked = async  () => {
     await dispatch(storeUser(null))

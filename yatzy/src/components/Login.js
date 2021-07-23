@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { InitializeUser } from '../reducers/userReducer'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import { socket } from '../services/socketService'
 import { StyledInput, Text, StyledButton } from './StyledComponents'
 
 
@@ -17,6 +16,7 @@ const Login= () => {
   const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const socket = useSelector(state => state.socket)
 
   const loginHandler = async (event) => {
     event.preventDefault()
@@ -26,7 +26,7 @@ const Login= () => {
       password : password
     }
     console.log(credentials)
-    const loggedInUser = await dispatch(InitializeUser(credentials))
+    const loggedInUser = await dispatch(InitializeUser(socket, credentials))
     console.log('loggedinuser = ', loggedInUser)
     history.push('/yatzyroom')
 

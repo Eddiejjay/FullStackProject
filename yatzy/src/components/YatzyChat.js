@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { StyledButton, Text, StyledInput, ChatBox, StyledMessage, MessageContainer  } from './StyledComponents'
-import { socket } from '../services/socketService'
 import { useSelector, useDispatch } from 'react-redux'
 import { setPrivateRoom } from '../reducers/privateRoomReducer'
 // import { setPrivateChat } from '../reducers/privateChatReducer'
@@ -30,33 +29,34 @@ const YatzyChat = () => {
   const [message, setMessage] = useState('')
   // const [privateRoom, setPrivateRoom] = useState('')
   const privateRoom = useSelector(state => state.privateRoom)
+  const socket = useSelector(state => state.socket)
   // const chatLog = useSelector (state => state.chatLog)
   // const [readyMessage, setReadyMessage] = useState('')
 
+  const jorma = ''
+
+  useEffect(() => {
+    socket.on('chat-message-back-to-privatechat', message => {
+      console.log('chat-message-back-to-all-sockets', message)
+      setChatList([...chatList1, message])
+      // dispatch(setPrivateChat(`${username}: ${message}`))
+      socket.off('chat-message-back-to-privatechat')
+    })
+    // socket.once('joined-username-back-from-server', username => {
+    //   setChatList([...chatList1, `${username} joind YatzyRooms`])
+    //   setUsersInLobby([...usersInLobby, username])
 
 
-  // useEffect(() => {
-  //   setChatList(chatLog)
-  // },[allPoints])
+    // })
+    socket.on('private-room', privateRoom => {
+      dispatch(setPrivateRoom(privateRoom))
 
 
-  socket.once('chat-message-back-to-privatechat', message => {
-    console.log('chat-message-back-to-all-sockets', message)
-    setChatList([...chatList1, message])
-    // dispatch(setPrivateChat(`${username}: ${message}`))
-    socket.off('chat-message-back-to-privatechat')
-  })
-  // socket.once('joined-username-back-from-server', username => {
-  //   setChatList([...chatList1, `${username} joind YatzyRooms`])
-  //   setUsersInLobby([...usersInLobby, username])
+    })
+  },[jorma])
 
 
-  // })
-  socket.on('private-room', privateRoom => {
-    dispatch(setPrivateRoom(privateRoom))
 
-
-  })
   const updateScroll = () => {
     var element = document.getElementById('yatzychat123')
     console.log('elemetn ====' , element )

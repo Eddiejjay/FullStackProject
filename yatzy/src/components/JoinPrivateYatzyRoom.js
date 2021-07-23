@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { socket } from '../services/socketService'
 import { useHistory } from 'react-router-dom'
 import { addUserInPrivateYatzyRoom  } from '../services/socketService'
 
@@ -13,10 +12,11 @@ const JoinPrivateYatzyRoom = () => {
   const history = useHistory()
 
   const user = useSelector (state => state.user.username)
+  const socket = useSelector(state => state.socket)
 
   const joinPrivateYatzyRoom = () => {
     socket.emit('joinPrivateYatzyRoom' ,joinInputValue)
-    addUserInPrivateYatzyRoom(user)
+    addUserInPrivateYatzyRoom(socket, user)
     history.push('/yatzy')
 
 
