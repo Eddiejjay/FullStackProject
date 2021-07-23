@@ -36,12 +36,12 @@ const YatzyChat = () => {
   const jorma = ''
 
   useEffect(() => {
-    socket.on('chat-message-back-to-privatechat', message => {
-      console.log('chat-message-back-to-all-sockets', message)
-      setChatList([...chatList1, message])
-      // dispatch(setPrivateChat(`${username}: ${message}`))
-      socket.off('chat-message-back-to-privatechat')
-    })
+    // socket.on('chat-message-back-to-privatechat', message => {
+    //   console.log('chat-message-back-to-all-sockets', message)
+    //   setChatList([...chatList1, message])
+    //   // dispatch(setPrivateChat(`${username}: ${message}`))
+    //   socket.off('chat-message-back-to-privatechat')
+    // })
     // socket.once('joined-username-back-from-server', username => {
     //   setChatList([...chatList1, `${username} joind YatzyRooms`])
     //   setUsersInLobby([...usersInLobby, username])
@@ -55,7 +55,15 @@ const YatzyChat = () => {
     })
   },[jorma])
 
-
+  useEffect(() => {
+    socket.on('chat-message-back-to-privatechat', message => {
+      console.log('chat-message-back-to-all-sockets', message)
+      setChatList([...chatList1, message])
+    // dispatch(setPrivateChat(`${username}: ${message}`))
+    // socket.off('chat-message-back-to-privatechat')
+    })
+    return () => {socket.off('chat-message-back-to-privatechat')}
+  },[chatList1])
 
   const updateScroll = () => {
     var element = document.getElementById('yatzychat123')

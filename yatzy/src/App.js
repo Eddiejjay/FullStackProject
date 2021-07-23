@@ -38,14 +38,27 @@ import { setSocket } from './reducers/socketReducer'
 // const endPoint = 'http://localhost:3003'
 
 
+const Container = styled.div `
+  
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  padding:10px;
+  align-items: flex-start;
+
+  `
+
+
+
+
 const App = () => {
 
   const dispatch = useDispatch()
   const endPoint = 'http://localhost:3003'
 
-  useEffect(async () => {
+  useEffect(() => {
     let socket = io(endPoint)
-    await dispatch(setSocket(socket))
+    dispatch(setSocket(socket))
     console.log('socket reducerista on', socket)
 
     socket.on('online-user-back-to-all', username => {
@@ -98,16 +111,6 @@ const App = () => {
   //   console.log('initplayers 1')
   // }, [dispatch])
 
-
-  const Container = styled.div `
-  
-  display:flex;
-  flex-direction: row;
-  justify-content: center;
-  padding:10px;
-  align-items: flex-start;
-
-  `
 
   // const StyledImg = styled.img`
   // width: 200px;

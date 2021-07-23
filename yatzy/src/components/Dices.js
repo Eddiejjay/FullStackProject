@@ -6,6 +6,14 @@ import Dice from 'react-dice-roll'
 import styled from 'styled-components'
 // import { setDice } from '../reducers/diceReducer'
 
+const StyledDices = styled.div`
+height:200px;
+display:flex;
+padding: 10px;
+align-content: stretch;
+justify-content: center;
+gap: 3%;
+`
 
 const Dices = () => {
   const socket = useSelector(state => state.socket)
@@ -33,14 +41,6 @@ const Dices = () => {
   const user = useSelector(state => state.user.username)
 
 
-  const StyledDices = styled.div`
-  height:200px;
-  display:flex;
-  padding: 10px;
-  align-content: stretch;
-  justify-content: center;
-  gap: 3%;
-`
   // const rollDice = () => {
   //   const press =  new KeyboardEvent('keypress',{ 'key':'Enter' })
   //   dispatchEvent(press)

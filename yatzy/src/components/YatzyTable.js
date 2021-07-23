@@ -111,11 +111,7 @@ const YatzyTable = () => {
   const jorma = ''
 
   useEffect(() => {
-    socket.on('turns-stats',(player, combination, points) => {
-      console.log('turns stats')
-      dispatch(addTurnsPoints(player, combination, Number(points)))
-      dispatch(nextTurn(players, turn.turn, turn.maxTurns))
-    })
+
 
     socket.on('valisummaPoints',(allPoints) => {
       console.log('valsummaallPoisnts', allPoints)
@@ -131,8 +127,15 @@ const YatzyTable = () => {
 
   },[jorma])
 
+  useEffect(() => {
 
-
+    socket.on('turns-stats',(player, combination, points) => {
+      console.log('turns stats')
+      dispatch(addTurnsPoints(player, combination, Number(points)))
+      dispatch(nextTurn(players, turn.turn, turn.maxTurns))
+    })
+    return () => {socket.off('turns-stats')}
+  },[turn])
 
 
   const inputChange = (event) => {

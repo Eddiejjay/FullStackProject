@@ -39,12 +39,6 @@ const Chat = () => {
   const jorma = ''
 
   useEffect(() => {
-    socket.on('chat-message-back-to-all-sockets', message => {
-      console.log('chat-message-back-to-all-sockets', message)
-      setChatList([...chatList, message])
-      // socket.off('chat-message-back-to-all-sockets')
-
-    })
 
     socket.on('joined-username-back-from-server', username => {
       setChatList([...chatList, `${username} joined YatzyRoom`])
@@ -60,6 +54,19 @@ const Chat = () => {
 
 
   },[jorma])
+
+
+
+  useEffect(() => {
+    socket.on('chat-message-back-to-all-sockets', message => {
+      console.log('chat-message-back-to-all-sockets', message)
+      setChatList([...chatList, message])
+      // socket.off('chat-message-back-to-all-sockets'
+    })
+
+    return () => {socket.off('chat-message-back-to-all-sockets')}
+  },[chatList])
+
 
 
 
