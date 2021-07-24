@@ -7,5 +7,9 @@
 
 <img src=https://github.com/Eddiejjay/FullStackProject/blob/main/Documents/Kuvat/home.png>
 
+### Kirjauduttuasi sisään pääset YatzyRoomiin, jossa voit chättäillä muiden pelaajien kanssa sekä luoda ja liittyä privaatti peleihin. 
+
+<img src=https://github.com/Eddiejjay/FullStackProject/blob/main/Documents/Kuvat/lobby.png>
+
 
 
