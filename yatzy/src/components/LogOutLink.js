@@ -16,7 +16,6 @@ const LogOutLink = () => {
   const logOutClicked = async  () => {
     await dispatch(storeUser(null))
     history.push('/')
-    console.log('perse logged out')
     socket.emit('player-log-out', player )
 
   }

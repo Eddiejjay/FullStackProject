@@ -27,12 +27,10 @@ const EndGameButton = () => {
   },[jorma])
 
   const deletePointsFromDb = () => {
-    console.log('deleeteall clicked')
     pointService.deleteAll()
   }
 
   const endGameClicked = () => {
-    console.log('EnGame Clicked')
     socket.emit('end-game')
     deletePointsFromDb()
   }

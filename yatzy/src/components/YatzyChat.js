@@ -31,7 +31,6 @@ const YatzyChat = () => {
 
   useEffect(() => {
     socket.on('chat-message-back-to-privatechat', message => {
-      console.log('chat-message-back-to-all-sockets', message)
       setChatList([...chatList1, message])
     })
     return () => {socket.off('chat-message-back-to-privatechat')}
@@ -39,21 +38,17 @@ const YatzyChat = () => {
 
   const updateScroll = () => {
     var element = document.getElementById('yatzychat123')
-    console.log('elemetn ====' , element )
     element.scrollTop = element.scrollHeight
   }
 
   const sendButtonClicked = () => {
     socket.emit('private-chat-message',privateRoom, message ,username)
-    console.log('privateroom sendclkicdeistä',privateRoom)
     setChatList([...chatList1,`${username}: ${message}`])
-    console.log('privateroom', privateRoom)
     updateScroll()
     setMessage('')
   }
 
   const handleKeypress = e => {
-    console.log('handlekeypres', e.key)
     if (e.key === 'Enter') {
       sendButtonClicked()
     }

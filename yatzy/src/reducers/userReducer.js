@@ -6,7 +6,6 @@ import { addOnlineUserSocket } from '../services/socketService'
 export const InitializeUser = (socket, credentials) => {
   return async (dispatch) => {
     const user = await userService.login(credentials)
-    console.log('userobject', user)
     addOnlineUserSocket(socket, user.username)
     window.localStorage.setItem(
       'loggedUser', JSON.stringify(user))

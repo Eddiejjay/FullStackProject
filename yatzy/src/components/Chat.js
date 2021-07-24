@@ -26,13 +26,11 @@ const Chat = () => {
     })
     socket.on('new-private-room-created',(pRoom, user) => {
       setChatList([...chatList, `New Private Yatzyroom ${pRoom} created by ${user}`])
-      console.log('Created ', pRoom,user)
     })
   },[jorma])
 
   useEffect(() => {
     socket.on('chat-message-back-to-all-sockets', message => {
-      console.log('chat-message-back-to-all-sockets', message)
       setChatList([...chatList, message])
     })
     return () => {socket.off('chat-message-back-to-all-sockets')}
@@ -41,7 +39,6 @@ const Chat = () => {
 
 
   const handleKeypress = e => {
-    console.log('handlekeypres', e.key)
     if (e.key === 'Enter') {
       sendButtonClicked()
     }
@@ -51,7 +48,6 @@ const Chat = () => {
     socket.emit('chat-message',message ,username)
     setChatList([...chatList,`${username}: ${message}`])
     setMessage('')
-    console.log('chatlist on seuraava', chatList)
 
   }
 

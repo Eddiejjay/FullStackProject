@@ -22,7 +22,6 @@ const CreateUser = () => {
       username : username,
       password : password
     }
-    console.log(newUser)
     await userService.createUser(newUser)
     history.push('/')
   }

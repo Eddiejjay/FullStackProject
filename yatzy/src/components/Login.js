@@ -25,8 +25,8 @@ const Login= () => {
       username : username,
       password : password
     }
-    const loggedInUser = await dispatch(InitializeUser(socket, credentials))
-    console.log('loggedinuser = ', loggedInUser)
+
+    await dispatch(InitializeUser(socket, credentials))
     history.push('/yatzyroom')
     socket.emit('joined-yatzyroom', credentials.username)
 

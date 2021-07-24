@@ -38,16 +38,13 @@ const Dices = () => {
 
   useEffect(() => {
     socket.on('dice-value-back-form-server',(value, diceNro) => {
-      console.log('dice value back from server  CLIENT', value)
       diceRefMap[diceNro].current.rollDice(value)
-      console.log('dicerefmapista',diceRefMap[diceNro])
     })
   },[jorma])
 
   const diceValueToServer = (value, diceNro) => {
     if (turn === user) {
       socket.emit('dice-value', value, diceNro)
-      console.log('diceval to server ', value, diceNro)
     }}
 
   return (

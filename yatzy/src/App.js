@@ -46,7 +46,7 @@ const App = () => {
       dispatch(addOnlineUser(username))
     })
     socket.on('delete-user-from-players-in-lobby',(socketId) => {
-      console.log('userDELETED FROM lobbylist iwth id ', socketId)
+      console.log('userDELETED FROM lobbylist with id ', socketId)
     })
     socket.on('sockets-yatzy-room',(sockets) => {
       console.log('sockets in yatzyroom client ', sockets)
@@ -87,7 +87,6 @@ const App = () => {
             <YatzyChat></YatzyChat>
           </Container>
           {/* <button onClick = {deletePointsFromDb}>delete points from database</button> */}
-          {console.log('points', points)}
           {points.length === 0 && <StyledButton onClick = {startGameClicked}><Text>Start Game</Text></StyledButton>}
           {points.length !== 0 && <EndGameButton></EndGameButton>}
         </Route>

@@ -51,7 +51,6 @@ const YatzyTable = () => {
 
   const inputChange = (event) => {
     event.preventDefault()
-    console.log('target.name ', event.target.name)
     const arr = event.target.name.split(',')
     arr.push(event.target.value)
     setCombinationPlayer(arr)
