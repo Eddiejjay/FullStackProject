@@ -1,4 +1,3 @@
-// import playerService from '../services/playerService'
 
 export const setChat = (message) => {
   return async dispatch => {

@@ -134,3 +134,61 @@ export const HeadingText = styled.div `
  font-style: italic;
  font-variant: small-caps;
  text-transform: capitalize;`
+
+export const StyledTable = styled.table `
+    margin-left: auto;
+    margin-right: auto;
+    display:flex;
+    justify-content: center;
+    row-gap: 20px;
+    column-gap: 2rem;
+    border-collapse: collapse; 
+    `
+export const Combination = styled.td `
+display:flex;
+justify-content:center;
+ color:white;
+ font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: 2px;
+word-spacing: 2px;
+
+font-weight: 700;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: italic;
+font-variant: small-caps;
+text-transform: capitalize;
+    `
+
+export const StyledRow = styled.tr`
+border: 5px groove rgba(20,20,20,0.17);
+border-radius: 40px 40px 40px 40px;
+
+`
+
+export const StyledCell = styled.td `
+        padding : 5px; 
+        width : 70px;   
+        font : cursive;
+        color: white;
+        font-size: 25px;
+        
+        `
+
+export const LogoCell = styled.td `
+width: 40px;
+`
+
+export const NameCell = styled.td `
+ color:white;
+ font-family: "Comic Sans MS", cursive, sans-serif;
+font-size: 25px;
+letter-spacing: 2px;
+word-spacing: 2px;
+font-weight: 700;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: italic;
+font-variant: small-caps;
+text-transform: capitalize;
+padding: 10px;
+`

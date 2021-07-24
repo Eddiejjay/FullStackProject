@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { addUserInPrivateYatzyRoom  } from '../services/socketService'
-
-
 import { StyledInput, StyledButton, Text } from './StyledComponents'
 import { useSelector } from 'react-redux'
 
@@ -10,7 +8,6 @@ const JoinPrivateYatzyRoom = () => {
   const [createInputValue, setCreateInputValue] = useState('')
   const [joinInputValue, setJoinInputValue] = useState('')
   const history = useHistory()
-
   const user = useSelector (state => state.user.username)
   const socket = useSelector(state => state.socket)
 
@@ -18,15 +15,12 @@ const JoinPrivateYatzyRoom = () => {
     socket.emit('joinPrivateYatzyRoom' ,joinInputValue)
     addUserInPrivateYatzyRoom(socket, user)
     history.push('/yatzy')
-
-
   }
 
   const createPrivateYatzyRoom = () => {
     socket.emit('joinPrivateYatzyRoom' ,createInputValue)
     setCreateInputValue('')
     socket.emit('new-private-yatzyroom', user,createInputValue)
-
   }
 
   return (
@@ -44,7 +38,6 @@ const JoinPrivateYatzyRoom = () => {
         value = {joinInputValue}
         name = "JoinRoomInput"></StyledInput>
       <StyledButton onClick = {joinPrivateYatzyRoom}><Text>Join</Text></StyledButton>
-
     </div>
   )}
 

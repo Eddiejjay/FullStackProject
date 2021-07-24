@@ -11,16 +11,12 @@ import turnReducer from './reducers/turnReducer'
 import onlineUsersReducer from './reducers/onlineUsersReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-// import logo from './images/yazyhazymazylogo.png'
 import backgroundMountain from './images/background-mountain.jpg'
 import diceReducer from './reducers/diceReducer'
 import privateRoomReducer from './reducers/privateRoomReducer'
 import privateChatReducer from './reducers/privateChatReducer'
 import socketReducer from './reducers/socketReducer'
 import chatReducer from './reducers/chatReducer'
-// import backGroundHome from './images/background-home.jpg'
-
-
 
 const Container = styled.div`
 height:2000px;
@@ -31,9 +27,6 @@ text-align: center;
  background-size: cover;
 
 `
-
-
-// background-size: contain;
 const reducer = combineReducers({
   points: pointsReducer,
   players: playerReducer,

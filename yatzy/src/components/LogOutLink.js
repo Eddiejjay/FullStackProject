@@ -21,22 +21,10 @@ const LogOutLink = () => {
 
   }
 
-
-
-
-
   return (
-
-
     <StyledLink><Link onClick = {logOutClicked} style={{ textDecoration: 'none' }}  to="/"><NavBarText>Log out</NavBarText></Link></StyledLink>
-
-
   )
-
-
-
 }
-
 
 
 export default LogOutLink

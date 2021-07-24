@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 
-const baseUrl = 'http://localhost:3003/api/points'
+// const baseUrl = 'http://localhost:3003/api/points'
+const baseUrl = '/api/points'
 
 const getAll = async () => {
   const response = await axios.get(baseUrl)
@@ -26,9 +27,7 @@ const updatePoints = async (player, combination, points) => {
   return response
 }
 
-
 const postPoints = async (player) => {
-
   const pointObject = {
     'points' : {
       'ykkoset': 0,
@@ -51,14 +50,11 @@ const postPoints = async (player) => {
       'pisteet': 0
     } ,
     'player': player
-
   }
 
   const response = await axios.post(baseUrl , pointObject)
   console.log('response dataaa', response.data)
   return response.data
-
 }
-
 
 export default { getAll, postPoints, deleteAll, updatePoints }

@@ -4,64 +4,8 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addTurnsPoints }  from '../reducers/pointsReducer'
 import { nextTurn } from '../reducers/turnReducer'
-// import logo from '../images/yazyhazymazylogo.png'
-import { StyledButton, ButtonText } from './StyledComponents'
+import { StyledButton, ButtonText, StyledTable, Combination, StyledRow, StyledCell, LogoCell, NameCell } from './StyledComponents'
 import { Text } from './StyledComponents'
-
-const StyledTable = styled.table `
-
-    margin-left: auto;
-    margin-right: auto;
-    display:flex;
-    justify-content: center;
-    row-gap: 20px;
-    column-gap: 2rem;
-    border-collapse: collapse; 
-
-  
-    
-
-    `
-const Combination = styled.td `
-
-display:flex;
-justify-content:center;
- color:white;
- font-family: "Comic Sans MS", cursive, sans-serif;
-font-size: 25px;
-letter-spacing: 2px;
-word-spacing: 2px;
-
-font-weight: 700;
-text-decoration: none solid rgb(68, 68, 68);
-font-style: italic;
-font-variant: small-caps;
-text-transform: capitalize;
-    `
-
-const StyledRow = styled.tr`
-
-
-border: 5px groove rgba(20,20,20,0.17);
-border-radius: 40px 40px 40px 40px;
-
-`
-
-const StyledCell = styled.td `
-        padding : 5px; 
-        width : 70px;   
-        font : cursive;
-        color: white;
-        font-size: 25px;
-        
-        `
-
-const LogoCell = styled.td `
-width: 40px;
-`
-// const LogoImg = styled.img `
-// width: 100px;
-// `
 
 const StyledInput = styled.input`
 width : 65px;   
@@ -72,65 +16,32 @@ width : 65px;
           background: #fff0db;
           
         }
-
         `
-// const ReadyButton = styled.button`
-//       border-radius: 50%;
-//       font-size: 20px;
 
-//     `
-const NameCell = styled.td `
- color:white;
- font-family: "Comic Sans MS", cursive, sans-serif;
-font-size: 25px;
-letter-spacing: 2px;
-word-spacing: 2px;
-font-weight: 700;
-text-decoration: none solid rgb(68, 68, 68);
-font-style: italic;
-font-variant: small-caps;
-text-transform: capitalize;
-padding: 10px;
-`
-// border-left: 3px groove rgba(20,20,20,0.17);
 const YatzyTable = () => {
   const dispatch = useDispatch()
   const [combinationPlayer, setCombinationPlayer] = useState([])
   const properties =
     [  'ykkoset','kakkoset','kolmoset','neloset','vitoset','kutoset','valisumma','bonus','pari','kaksiparia',
       'kolmesamaa','neljasamaa', 'pikkusuora','isosuora','tayskasi','sattuma','yatzy','pisteet']
-
   const players = useSelector(state => state.players)
   const turn = useSelector(state => state.turn)
+  const allPoints = useSelector(state => state.points)
   const socket = useSelector(state => state.socket)
-  console.log('turn',turn)
-
-  // const playersFromStore = useSelector(state => state)
-
-
   const jorma = ''
 
   useEffect(() => {
-
-
     socket.on('valisummaPoints',(allPoints) => {
-      console.log('valsummaallPoisnts', allPoints)
       allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
       allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
-
     })
     socket.on('allPoints',(allPoints) => {
       allPoints.map(object => dispatch(addTurnsPoints(object.player, 'pisteet', calculateAllpoints(object.points))))
-
     })
-
-
   },[jorma])
 
   useEffect(() => {
-
     socket.on('turns-stats',(player, combination, points) => {
-      console.log('turns stats')
       dispatch(addTurnsPoints(player, combination, Number(points)))
       dispatch(nextTurn(players, turn.turn, turn.maxTurns))
     })
@@ -146,32 +57,20 @@ const YatzyTable = () => {
     setCombinationPlayer(arr)
   }
 
-  const allPoints = useSelector(state => state.points)
 
   const readyClicked = () => {
     const playerToAddPoints = combinationPlayer[1]
     const combinationToAddPoints = combinationPlayer[0]
     const pointsToAdd = combinationPlayer[2]
     dispatch(addTurnsPoints(playerToAddPoints, combinationToAddPoints, Number(pointsToAdd)))
-
     socket.emit('turn-ready', playerToAddPoints, combinationToAddPoints, pointsToAdd, turn.turn, turn.maxturns)
-    // socket.on('turns-stats',(player, combination, points) => {
-    //   dispatch(addTurnsPoints(player, combination, Number(points)))
-    // })
     dispatch(nextTurn(players, turn.turn, turn.maxTurns))
   }
 
   const valisummaOnClick = () => {
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
     allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
-
     socket.emit('valisumma-calculation', allPoints)
-    // socket.on('valisummaPoints',(allPoints) => {
-    //   allPoints.map(object => dispatch(addTurnsPoints(object.player, 'valisumma', calculateValisumma(object.points))))
-    //   allPoints.map(object => dispatch(addTurnsPoints(object.player, 'bonus', calculateValisumma(object.points) < 63 ? 0: 50)))
-
-    // })
-
   }
 
   const allPointsOnClick = () => {
@@ -187,9 +86,6 @@ const YatzyTable = () => {
   }
 
   const calculateValisumma = (points) => {
-    // tämän funktion tarkoitus on ottaa parametriksi yhden pelaajan serverobjektista points objekti
-    //1. muuttaa objekti taulukoksi jossa ovat objecktin valuet.
-    //2. laskea taulukosta 6 ensimmäistä arvoa ja niiden lopputulos on valisumma
     const pointsArray = Object.values(points)
     const slicedArray = pointsArray.slice(0,6)
     let sum = slicedArray.reduce((a,c) => a + c, 0)
@@ -198,10 +94,8 @@ const YatzyTable = () => {
 
   return (
     <div>
-      {/* <h2>{turn.player.player}n vuoro</h2> */}
       <StyledTable>
         <tbody><StyledRow><LogoCell></LogoCell>{players.map(player => <NameCell key={'nimikentta'+player}>{player}</NameCell>)}</StyledRow>
-
           <StyledRow>
             <Combination>{properties[0]}</Combination>
             {allPoints.map(points => (points.points.ykkoset === 0 && points.player === turn.player) ?<td key = {'ykkosetinput'+points.player}><StyledInput name={[properties[0], points.player]} onChange={inputChange}/> </td> :<StyledCell name = {points.player} key = {'ykkoset'+points.player}> {points.points.ykkoset} </StyledCell>)}
@@ -210,12 +104,10 @@ const YatzyTable = () => {
             <Combination>{properties[1]}</Combination>
             {allPoints.map(points => (points.points.kakkoset === 0 && points.player === turn.player)?<td key = {'kakkosetinput'+points.player}><StyledInput name={[properties[1], points.player]} onChange={inputChange}/> </td> :<StyledCell name = {points.player} key = {'kakkoset'+points.player}> {points.points.kakkoset} </StyledCell>)}
           </StyledRow>
-
           <StyledRow>
             <Combination>{properties[2]}</Combination>
             {allPoints.map(points => (points.points.kolmoset === 0 && points.player === turn.player) ?<td key = {'kolmosetinput'+points.player}><StyledInput name={[properties[2], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {'kolmoset'+points.player}> {points.points.kolmoset} </StyledCell>)}
           </StyledRow>
-
           <StyledRow>
             <Combination>{properties[3]}</Combination>
             {allPoints.map(points => (points.points.neloset === 0 && points.player === turn.player) ?<td key = {'nelosettinput'+points.player}><StyledInput name={[properties[3], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {'neloset'+points.player}> {points.points.neloset} </StyledCell>)}
@@ -233,14 +125,10 @@ const YatzyTable = () => {
             {allPoints.map(points =>  <StyledCell name = {points.player} key = {'valisumma'+points.player}> {points.points.valisumma} </StyledCell>)}
             <td><StyledButton  onClick={valisummaOnClick}><ButtonText>Laske</ButtonText></StyledButton></td>
           </StyledRow>
-
           <StyledRow>
             <Combination>{properties[7]}</Combination>
             {allPoints.map(points => <StyledCell name = {points.player} key = {'bonus'+points.player}> {points.points.bonus} </StyledCell>)}
           </StyledRow>
-          {//mietin miten saat dipatchattyä bonus pisteet serverille, siin' vaiheessa kun välisymma lasketaan Olisiko valisummaonclick() =?
-          }
-
           <StyledRow>
             <Combination>{properties[8]}</Combination>
             {allPoints.map(points => (points.points.pari === 0 && points.player === turn.player) ?<td key = {'pariinput'+points.player}><StyledInput name={[properties[8], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {'pari'+points.player}> {points.points.pari} </StyledCell>)}
@@ -277,54 +165,17 @@ const YatzyTable = () => {
             <Combination>{properties[16]}</Combination>
             {allPoints.map(points => (points.points.yatzy === 0 && points.player === turn.player) ?<td key = {'yatzyinput'+points.player}><StyledInput name={[properties[16], points.player]} onChange={inputChange}/> </td>:<StyledCell name = {points.player} key = {'yatzy'+points.player}> {points.points.yatzy} </StyledCell>)}
           </StyledRow>
-
-
-
           <StyledRow>
             <Combination>{properties[17]}</Combination>
             {allPoints.map(points => <StyledCell name = {points.player} key = {'pisteet'+points.player}> {points.points.pisteet} </StyledCell>)}
             <td><StyledButton onClick={allPointsOnClick}><ButtonText>Laske</ButtonText></StyledButton></td>
           </StyledRow>
-
         </tbody>
       </StyledTable>
-
       <StyledButton onClick ={readyClicked}><Text>Ready</Text></StyledButton>
-
     </div>
-
   )
 }
 
 
 export default YatzyTable
-
-
-{/* {properties.map(property =>
-          <tbody key={property}>
-            <StyledRow key={property}>
-              <Combination>{property}</Combinatdion>
-              {players.map(player =>
-                allPoints.map(points =>
-                  points.player === player && points.points.ykkoset === 0 ?
-                    <StyledCell key ={player}><StyledInput name={[property, player]}onChange={inputChange}/></StyledCell> : <StyledCell/>
-                )
-              )}
-
-            </StyledRow>
-          </tbody>)} */}
-
-{/*PISTEIDEN YHTEEN LASKUSSA VOIT HYÖDYNTÄÄ METODIA JOKA MUUTTAA OBJECTIN ARVOT LISAKSI
-       Object.values() näin saat laskettua pisteet esiumn reducella ja siutten dispatchaat pisteisiin */}
-
-
-//  const inputChange = (event) => {
-//   event.preventDefault()
-//   const arr = event.target.name.split(',')
-//   setPointsToRegister(arr)
-//   console.log('statesta',pointsToRegister, typeof pointsToRegister)
-//   return (
-//     console.log(pointsToRegister)
-//   )
-
-// }

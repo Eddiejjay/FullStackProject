@@ -1,8 +1,6 @@
-// import playerService from '../services/playerService'
 
 export const initializePlayers = (players) => {
   return async dispatch => {
-    // const players = await playerService.getAll()
     dispatch ( {
       type: 'INITPLAYERS',
       players : players

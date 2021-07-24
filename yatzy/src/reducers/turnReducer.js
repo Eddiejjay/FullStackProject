@@ -1,11 +1,7 @@
 
-// import playerService from '../services/playerService'
-
-
 
 export const initializeTurn = (players) => {
   return async dispatch => {
-    // const players = await playerService.getAll()
     dispatch ( {
       type: 'INITIALIZETURN',
       maxTurns : players.length-1,
@@ -17,8 +13,6 @@ export const initializeTurn = (players) => {
 
 export const nextTurn = (players, turn, maxTurns) => {
   return async dispatch => {
-    // const players = await playerService.getAll()
-    console.log('turn = ', turn, 'maxTurn =', maxTurns)
     const nextTurn = turn === maxTurns ? 0 : turn +1
     dispatch ( {
       type: 'NEXTTURN',
@@ -27,8 +21,6 @@ export const nextTurn = (players, turn, maxTurns) => {
       player: players[nextTurn]
 
     })}}
-
-
 
 const turnReducer = (state  = {}, action) => {
   switch (action.type)

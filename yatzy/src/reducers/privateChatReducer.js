@@ -1,4 +1,3 @@
-// import playerService from '../services/playerService'
 
 export const setPrivateChat = (message) => {
   return async dispatch => {

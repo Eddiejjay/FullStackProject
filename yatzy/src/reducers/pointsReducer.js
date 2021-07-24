@@ -1,40 +1,16 @@
 import pointService from '../services/pointService'
-// import playerService from '../services/playerService'
-// import { socket } from '../services/socketService'
 
 export const initializePoints = (players) => {
   return async dispatch => {
-    // const players = await playerService.getAll()
-    console.log('players reducerista ', players)
     const done = await Promise.all(players.map(async player => await pointService.postPoints(player)))
-    // for (const player of players) {
-    //   const done = await pointService.postPoints(player.player)
-    //   console.log('done',done)
-    // }
-    console.log('done', done)
-    // const points = await pointService.getAll()
-    // console.log('piseet haettuna pointservicestä in reducer', points)
     dispatch ( {
       type: 'INITPOINTS',
       points : done
 
     })}}
 
-
-
-// export const initializePoints = () => {
-//   return async dispatch => {
-//     const points = await pointService.getAll()
-//     dispatch ( {
-//       type: 'INITPOINTS',
-//       points : points
-
-//     })}}
-
-
 export const addTurnsPoints = ( player, combination,points) => {
   return async dispatch => {
-    // socket.emit('turn-ready', player, combination, points)
     await pointService.updatePoints(player, combination, points)
     dispatch ( {
       type: 'ADDTURNSPOINTS',
@@ -69,7 +45,3 @@ const pointsReducer = (state  = [], action) => {
   }
 }
 export default pointsReducer
-
-// const blogi = state.find(b => b.id === action.id)
-// const updatedBlogi = { ...blogi, likes:blogi.likes +1 }
-// return state = state.map(b => b.id !== updatedBlogi.id ? b :updatedBlogi)

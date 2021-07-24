@@ -9,14 +9,10 @@ import { initializePlayers }  from '../reducers/playerReducer'
 import { useSelector } from 'react-redux'
 
 
-
 const EndGameButton = () => {
-
   const history = useHistory()
   const dispatch = useDispatch()
   const socket = useSelector(state => state.socket)
-
-
   const jorma = ''
 
   useEffect(() => {
@@ -30,38 +26,20 @@ const EndGameButton = () => {
 
   },[jorma])
 
-
-
-
-
-
   const deletePointsFromDb = () => {
     console.log('deleeteall clicked')
     pointService.deleteAll()
   }
 
   const endGameClicked = () => {
-
     console.log('EnGame Clicked')
     socket.emit('end-game')
     deletePointsFromDb()
-    // history.push('/yatzyroom')
-
   }
 
-
   return (
-
-
     <StyledButton onClick = {endGameClicked}><Text>End Game</Text></StyledButton>
-
-
   )
-
-
-
 }
-
-
 
 export default EndGameButton

@@ -18,26 +18,23 @@ const Login= () => {
   const [password, setPassword] = useState('')
   const socket = useSelector(state => state.socket)
 
+
   const loginHandler = async (event) => {
     event.preventDefault()
-
     const credentials = {
       username : username,
       password : password
     }
-    console.log(credentials)
     const loggedInUser = await dispatch(InitializeUser(socket, credentials))
     console.log('loggedinuser = ', loggedInUser)
     history.push('/yatzyroom')
-
     socket.emit('joined-yatzyroom', credentials.username)
 
   }
 
   return (
     <LoginCointainer>
-      <Text>Stop wondering, log in and roll it! </Text>
-
+      <Text>Log `n` roll! </Text>
       <form onSubmit = {loginHandler}>
         <div>
           <Text>Username</Text>
@@ -58,12 +55,9 @@ const Login= () => {
             name = "Password"
             onChange = {
               ({ target }) => setPassword(target.value)}
-
           />
         </div>
-
         <StyledButton id = "login-button" type = "submit" > <Text>Log in</Text></StyledButton>
-
       </form>
     </LoginCointainer>
   )

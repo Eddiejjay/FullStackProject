@@ -12,13 +12,12 @@ padding:100px;
 const CreateUser = () => {
 
   const history = useHistory()
-
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+
   const loginHandler = async (event) => {
     event.preventDefault()
-
     const newUser = {
       username : username,
       password : password
@@ -31,7 +30,6 @@ const CreateUser = () => {
   return (
     <CreateUserCointainer>
       <Text>Create new user</Text>
-
       <form onSubmit = {loginHandler}>
         <div>
           <Text>Username</Text>
@@ -52,12 +50,9 @@ const CreateUser = () => {
             name = "Password"
             onChange = {
               ({ target }) => setPassword(target.value)}
-
           />
         </div>
-
         <StyledButton id = "login-button" type = "submit" ><Text>Create</Text></StyledButton>
-
       </form>
     </CreateUserCointainer>
   )
