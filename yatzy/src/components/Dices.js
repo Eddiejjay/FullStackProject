@@ -34,13 +34,14 @@ const Dices = () => {
 
   const turn = useSelector(state => state.turn.player)
   const user = useSelector(state => state.user.username)
-  const jorma = ''
+
 
   useEffect(() => {
     socket.on('dice-value-back-form-server',(value, diceNro) => {
       diceRefMap[diceNro].current.rollDice(value)
     })
-  },[jorma])
+    return () => {socket.off('dice-value-back-form-server')}
+  },[diceRefMap])
 
   const diceValueToServer = (value, diceNro) => {
     if (turn === user) {
