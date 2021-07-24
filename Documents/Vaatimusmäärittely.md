@@ -5,6 +5,7 @@ Sovelluksella k채ytt채j채 voi pelata Yatzya internetin v채lityksell채 toisten k�
 
 ## Sovelluksen tarjoama toiminnallisuus 
 -Yatzyn pelaaminen, internetin v채lityksell채
+
 -Chat ikkuna
 
 
