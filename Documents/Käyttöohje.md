@@ -19,6 +19,7 @@
 
 ### Yatzy
 #### Vuorossa oleva pelaaja pyörittää noppia maximissaan 3 heittokertaa, merkitsee pisteet taulukkoon ja painaa 'Ready' nappia, jolloin vuoro siirtyy seuraavalle.
+#### [linkki Yatzyn sääntöihin](https://www.lautapeliopas.fi/saannot/yatzy/)
 #### Kun peli on päättynyt joku pelaajista painaa  'End Game' nappia jolloin pelaajat siirtyvät yatzyroom sivulle.
 
 <img src=https://github.com/Eddiejjay/FullStackProject/blob/main/Documents/Kuvat/game.png>
