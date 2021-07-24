@@ -37,9 +37,9 @@
 |20.7 |tyylien säätöä, koodin siistimistä yms.  |4h|
 |21.7|noppien säätö, siten että kaikki nopat toimivat täydellisesti multiplayerissä, sovellus Herokuun  |6h|
 |22.7 |bugien korjailua, tyylien hiomista|8,5h|
+|23.7|bugien korjailua  |9h|
+|24.7 |  ||
 | |  ||
-| |  ||
-| |  ||
-| yht   | 183 h   | | 
+| yht   | 192 h   | | 
 
 
